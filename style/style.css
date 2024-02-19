@@ -40,3 +40,12 @@ main {
 .statContainer img {
     max-width: 60px;
 }
+
+.driverForm {
+    font-size: large;
+}
+
+.driverTableDiv {
+    max-height: 60%;
+    overflow: auto;
+}
