@@ -45,7 +45,7 @@ main {
     font-size: large;
 }
 
-.driverTableDiv {
+.tableDiv {
     max-height: 60%;
     overflow: auto;
 }

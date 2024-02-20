@@ -83,38 +83,32 @@
     </aside>
    
     <main class="float-end d-flex align-items-center flex-column">
-        <div class="col-3 text-center mt-4">
-			<h2>List of all drivers:</h2>
-            <label for="filterSelect">Select nationality to filter drivers: </label>
-            <select class="form-select my-2" name="filterSelect" id="filterSelect">
-                <option selected></option>
-                <option value="netherland">Netherland</option>
-                <option value="monaco">Monaco</option>
-            </select>
-        </div>
+		<h2 class="my-3">List of all contract:</h2>
         <div class="tableDiv col-7 mt-4">
             <table class="table text-center table-striped">
                 <thead class="sticky-top">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Date of birth</th>
-                        <th scope="col">Nationality</th>
-                        <th scope="col">Number</th>
+                        <th scope="col">Team</th>
+                        <th scope="col">Sign year</th>
+                        <th scope="col">Expiration year</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
                         <td><a href="#">Charles Leclerc</a></td>
-                        <td>16/10/1997</td>
-                        <td>Monaco</td>
-                        <td>16</td>
+                        <td>Ferrari</td>
+                        <td>2019</td>
+                        <td>2027</td>
+                        <td><button class="btn btn-dark">Update</button></td>
                     </tr>
                     <tr>
                         <td><a href="#">Max Verstappen</a></td>
-                        <td>30/09/1997</td>
-                        <td>Netherland</td>
-                        <td>1</td>
+                        <td>Red Bull</td>
+                        <td>2016</td>
+                        <td>2029</td>
+                        <td><button class="btn btn-dark">Update</button></td>
                     </tr>
                 </tbody>
             </table>
