@@ -1,3 +1,6 @@
+<?php
+ini_set('display_errors', 1);
+?>
 <!-- Div with database info (Number of driver, team, season, races...) -->
 <main class="float-end d-flex flex-column justify-content-center align-items-center">
     <div class="infoDivHome">
@@ -8,22 +11,22 @@
                 <div class="border border-2  border-dark-subtle rounded col">
                     <h2 class="pt-2">Driver</h2>
                     <img class="py-3" src="./svg/helmet.svg" alt="Driver helmet icon">
-                    <p class="fs-3">20</p>
+                    <p class="fs-3"><?php echo $db->getNumberOfDriver() ?></p>
                 </div>
                 <div class="border border-2  border-dark-subtle rounded col">
                     <h2 class="pt-2">Team</h2>
                     <img class="py-3" src="./svg/formula-1.svg" alt="F1 car icon">
-                    <p class="fs-3">10</p>
+                    <p class="fs-3"><?php echo $db->getNumberOfTeam() ?></p>
                 </div>
                 <div class="border border-2  border-dark-subtle rounded col">
                     <h2 class="pt-2">Races</h2>
                     <img class="py-3" src="./svg/two-motor-flags.svg" alt="Checkered flags icon">
-                    <p class="fs-3">24</p>
+                    <p class="fs-3"><?php echo $db->getNumberOfRaces() ?></p>
                 </div>
                 <div class="border border-2  border-dark-subtle rounded col">
                     <h2 class="pt-2">Season</h2>
                     <img class="py-3" src="./svg/trophy.svg" alt="Trophy icon">
-                    <p class="fs-3">1</p>
+                    <p class="fs-3"><?php echo $db->getNumberOfChampionship() ?></p>
                 </div>
             </div>
         </div>
