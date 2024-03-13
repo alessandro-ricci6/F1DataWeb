@@ -49,4 +49,61 @@ class DatabaseHelper {
 
         return $result->fetch_row()[0];
     }
+
+    public function getSingleDriver($driverId) {
+        $stmt = $this->db->prepare("SELECT * FROM Driver WHERE idDriver = ?");
+        $stmt->bind_param('i', $driverId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC)[0];
+    }
+
+    public function getDriverNationalities() {
+        $stmt = $this->db->prepare("SELECT nationality FROM Driver GROUP BY nationality");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getRaceById($raceId) {
+        $stmt = $this->db->prepare("SELECT Race.laps, Race.round, Race.raceType, Track.trackName, Track.trackLength, Championship.season
+        FROM Race INNER JOIN Track ON Race.idTrack = Track.idTrack 
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        WHERE idRace = ?");
+        $stmt->bind_param('i', $raceId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC)[0];
+    }
+
+    public function getDriverResultById($driverId) {
+        $stmt = $this->db->prepare("SELECT *
+        FROM RaceResult
+        INNER JOIN Race ON Race.idRace = RaceResult.idRace
+        INNER JOIN Track ON Race.idTrack = Track.idTrack
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        WHERE idDriver = ? ORDER BY Race.idRace ASC");
+        $stmt->bind_param('i', $driverId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
+
+    public function getQualifyingResultById($driverId) {
+        $stmt = $this->db->prepare("SELECT *
+        FROM StartingGrid
+        INNER JOIN Race ON Race.idRace = StartingGrid.idRace
+        INNER JOIN Track ON Race.idTrack = Track.idTrack
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        WHERE idDriver = ? ORDER BY Race.idRace ASC");
+        $stmt->bind_param('i', $driverId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
 }

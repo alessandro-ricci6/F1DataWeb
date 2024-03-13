@@ -7,19 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>List Driver</title>
+    <title><?php echo $templateParams['title']; ?></title>
 </head>
 <body>
 
     <!-- Menu -->
     <aside class="float-start">
     	<div class="flex-shrink-0 p-3 bg-dark" style=" height: 100%;">
-    		<a href="../index.html" class="d-flex align-items-center pb-3 mb-3 link-light text-decoration-none border-bottom">
+    		<a href="./index.php" class="d-flex align-items-center pb-3 mb-3 link-light text-decoration-none border-bottom">
     			<span class="fs-5 fw-semibold">F1Data</span>
     		</a>
     		<ul class="list-unstyled ps-0">
     			<li class="listEl mb-1">
-    				<a href="../index.html" class="btn btn-dark d-inline-flex align-items-center rounded border-0" aria-expanded="true">
+    				<a href="./index.php" class="btn btn-dark d-inline-flex align-items-center rounded border-0" aria-expanded="true">
     					Home
     				</a>
     			</li>
@@ -30,7 +30,7 @@
     				<div class="collapse px-3" id="driver-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
     						<li><a href="../driver/addDriver.html" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
-    						<li><a href="../driver/listDriver.html" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
+    						<li><a href="./driverList.php" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
     			</li>
