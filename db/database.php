@@ -106,4 +106,13 @@ class DatabaseHelper {
 
         return $result;
     }
+
+    public function getDriverByNationality($nationality) {
+        $stmt = $this->db->prepare("SELECT * FROM Driver WHERE nationality = ?");
+        $stmt->bind_param('s', $nationality);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

@@ -6,7 +6,7 @@
         <div class="col-3 text-center mt-4">
 			<h2>List of all drivers:</h2>
             <label for="filterSelect">Select nationality to filter drivers: </label>
-            <select class="form-select my-2" name="filterSelect" id="filterSelect">
+            <select class="form-select my-2" name="filterSelect" id="nationalitySelect">
                 <option selected></option>
                 <?php foreach($nationalities as $nationality): ?>
                     <option value="<?php echo $nationality['nationality']; ?>"><?php echo $nationality['nationality']; ?></option>
@@ -14,7 +14,7 @@
             </select>
         </div>
         <div class="tableDiv col-7 mt-4">
-            <table class="table text-center table-striped">
+            <table class="table text-center table-striped" id="driverTable">
                 <thead class="sticky-top">
                     <tr>
                         <th scope="col">Name</th>
@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="driverTableBody">
                     <?php foreach($drivers as $driver): ?>
 
                     <tr>
@@ -38,3 +38,4 @@
             </table>
         </div>
     </main>
+    <script src="./script/driverList.js"></script>
