@@ -90,7 +90,7 @@ class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getQualifyingResultById($driverId) {
@@ -104,7 +104,7 @@ class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getDriverByNationality($nationality) {
@@ -114,5 +114,27 @@ class DatabaseHelper {
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNormalRacesWonByDriverId($driverId){
+        $stmt = $this->db->prepare("SELECT count(Race.idRace) FROM RaceResult
+        INNER JOIN Race ON Race.idRace = RaceResult.idRace
+        WHERE idDriver = ? AND position = 1 AND raceType = 'Normal'");
+        $stmt->bind_param('i', $driverId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_row()[0];
+    }
+
+    public function getSprintRacesWonByDriverId($driverId){
+        $stmt = $this->db->prepare("SELECT count(Race.idRace) FROM RaceResult
+        INNER JOIN Race ON Race.idRace = RaceResult.idRace
+        WHERE idDriver = ? AND position = 1 AND raceType = 'Sprint'");
+        $stmt->bind_param('i', $driverId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_row()[0];
     }
 }

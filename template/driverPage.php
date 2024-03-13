@@ -1,5 +1,6 @@
 <main class="float-end d-flex align-items-center flex-column overflow-auto">
 <?php $driver = $templateParams['driver'];
+ini_set('display_errors', 1);
     $results = $db->getDriverResultById($driver['idDriver']);
     $qualifying = $db->getQualifyingResultById($driver['idDriver']);?>
         <div class="p-4 text-center my-1">
@@ -8,8 +9,10 @@
                 <li class="list-group-item"><h6>Nationality:</h6><p><?php echo $driver['nationality']; ?></p></li>
                 <li class="list-group-item"><h6>Date of birth:</h6><p><?php echo $driver['dateOfBirth']; ?></p></li>
                 <?php if ($driver['permanentNumber'] != null):?>
-                    <li class="list-group-item"><h6>Number:</h6> <p><?php echo $driver['permanentNumber']; ?></p></li>
-                <?php endif; ?>    
+                    <li class="list-group-item"><h6>Number:</h6><p><?php echo $driver['permanentNumber']; ?></p></li>
+                <?php endif; ?>
+                <li class="list-group-item"><h6>Normal races won:</h6><p><?php echo $db->getNormalRacesWonByDriverId($driver['idDriver']) ?></p></li>
+                <li class="list-group-item"><h6>Sprint races won:</h6><p><?php echo $db->getSprintRacesWonByDriverId($driver['idDriver']) ?></p></li>
             </ul>
         </div>
 
