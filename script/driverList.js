@@ -21,7 +21,6 @@ function updateTable(driverList){
         <td>${driver.nationality}</td>
         <td>${getDriverNumber(driver.permanentNumber)}</td>`
         tableBody.appendChild(tr)
-        console.log(driver)
     }
 }
 

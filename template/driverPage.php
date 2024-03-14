@@ -20,7 +20,7 @@ ini_set('display_errors', 1);
         <h4>Contracts</h4>
 			<div class="tableDiv my-4 mx-4">
 				<table class="table">
-					<thead>
+					<thead class="sticky-top">
 					<tr>
 						<th scope="col">Sign year</th>
 						<th scope="col">Expiration year</th>
@@ -45,7 +45,7 @@ ini_set('display_errors', 1);
             <h4>Race results</h4>
 			<div class="tableDiv my-4 mx-4">
                 <table class="table">
-                    <thead>
+                    <thead class="sticky-top">
                         <tr>
                             <th scope="col">Race</th>
                             <th scope="col">Type</th>
@@ -77,7 +77,7 @@ ini_set('display_errors', 1);
             <h4>Qualifying results</h4>
 			<div class="tableDiv my-4 mx-4">
                 <table class="table">
-                    <thead>
+                    <thead class="sticky-top">
                         <tr>
                             <th scope="col">Race</th>
                             <th scope="col">Type</th>

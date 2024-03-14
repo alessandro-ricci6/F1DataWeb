@@ -137,4 +137,30 @@ class DatabaseHelper {
 
         return $result->fetch_row()[0];
     }
+
+    public function getAllTeam() {
+        $stmt = $this->db->prepare("SELECT * FROM Team");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTeamNationalities() {
+        $stmt = $this->db->prepare("SELECT nationality FROM Team GROUP BY nationality");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTeamByNationality($nationality) {
+        $stmt = $this->db->prepare("SELECT * FROM Team WHERE nationality = ?");
+        $stmt->bind_param('s', $nationality);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

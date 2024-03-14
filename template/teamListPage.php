@@ -1,11 +1,11 @@
 <main class="float-end d-flex align-items-center flex-column">
     <?php
-    $nationalities = $db->getDriverNationalities();
-    $drivers = $db->getAllDriver();
+    $teamList = $db->getAllTeam();
+    $nationalities = $db->getTeamNationalities();
     ?>
         <div class="col-3 text-center mt-4">
-			<h2>List of all drivers:</h2>
-            <label for="filterSelect">Select nationality to filter drivers: </label>
+			<h2>List of all team:</h2>
+            <label for="filterSelect">Select nationality to filter team: </label>
             <select class="form-select my-2" name="filterSelect" id="nationalitySelect">
                 <option selected>No filter</option>
                 <?php foreach($nationalities as $nationality): ?>
@@ -14,28 +14,25 @@
             </select>
         </div>
         <div class="tableDiv col-7 mt-4">
-            <table class="table text-center table-striped" id="driverTable">
+            <table class="table text-center table-striped">
                 <thead class="sticky-top">
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Date of birth</th>
                         <th scope="col">Nationality</th>
-                        <th scope="col">Number</th>
+                        <th scope="col">Headquarter</th>
                     </tr>
                 </thead>
 
-                <tbody id="driverTableBody">
-                    <?php foreach($drivers as $driver): ?>
-
+                <tbody id="teamTableBody">
+                    <?php foreach ($teamList as $team):?>
                     <tr>
-                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
-                        <td><?php echo $driver['dateOfBirth']; ?></td>
-                        <td><?php echo $driver['nationality']; ?></td>
-                        <td><?php echo $driver['permanentNumber']; ?></td>
+                        <td><a href="#"><?php echo $team['teamName']; ?></a></td>
+                        <td><?php echo $team['nationality']; ?></td>
+                        <td><?php echo $team['headquarter']; ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </main>
-    <script src="./script/driverList.js"></script>
+<script src="./script/teamList.js"></script>

@@ -42,7 +42,7 @@
     				<div class="collapse px-3" id="team-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
     						<li><a href="../team/addTeam.html" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
-    						<li><a href="../team/listTeam.html" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
+    						<li><a href="./teamList.php" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
     			</li>
