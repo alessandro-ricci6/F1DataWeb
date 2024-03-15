@@ -163,4 +163,14 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getDriverContract($idDriver) {
+        $stmt = $this->db->prepare("SELECT Contract.*, Team.teamName, Team.idTeam FROM Contract
+        INNER JOIN Team ON Contract.idTeam = Team.idTeam
+        WHERE idDriver = ?");
+        $stmt->bind_param('i', $idDriver);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
 }

@@ -1,8 +1,8 @@
 <main class="float-end d-flex align-items-center flex-column overflow-auto">
 <?php $driver = $templateParams['driver'];
-ini_set('display_errors', 1);
     $results = $db->getDriverResultById($driver['idDriver']);
-    $qualifying = $db->getQualifyingResultById($driver['idDriver']);?>
+    $qualifying = $db->getQualifyingResultById($driver['idDriver']);
+    $contracts = $db->getDriverContract($driver['idDriver']);?>
         <div class="p-4 text-center my-1">
             <h3 class="p-2"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></h3>
             <ul class="list-group list-group-horizontal col-10 mx-3">
@@ -28,16 +28,14 @@ ini_set('display_errors', 1);
 					</tr>
 					</thead>
 					<tbody>
-					<tr>
-						<td>2018</td>
-						<td>2019</td>
-						<td><a href="#">Sauber</a></td>
-					</tr>
-					<tr>
-						<td>2019</td>
-						<td>2026</td>
-						<td><a href="#">Ferrari</a></td>
-					</tr>
+                        <?php foreach($contracts as $contract):
+                        ?>
+                        <tr>
+                            <td><?php echo $contract['signingYear']; ?></td>
+                            <td><?php echo $contract['expirationYear']; ?></td>
+                            <td><a href="#"><?php echo $contract['teamName'] ?></a></td>
+                        </tr>
+                        <?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
