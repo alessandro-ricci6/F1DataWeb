@@ -33,7 +33,7 @@
                         <tr>
                             <td><?php echo $contract['signingYear']; ?></td>
                             <td><?php echo $contract['expirationYear']; ?></td>
-                            <td><a href="#"><?php echo $contract['teamName'] ?></a></td>
+                            <td><a href="teamDetail.php?teamId=<?php echo $contract['idTeam']; ?>"><?php echo $contract['teamName'] ?></a></td>
                         </tr>
                         <?php endforeach; ?>
 					</tbody>

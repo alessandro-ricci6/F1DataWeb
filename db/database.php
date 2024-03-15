@@ -173,4 +173,24 @@ class DatabaseHelper {
 
         return $result;
     }
+
+    public function getTeamContract($idTeam) {
+        $stmt = $this->db->prepare("SELECT Contract.*, Driver.* FROM Contract
+        INNER JOIN Driver ON Contract.idDriver = Driver.idDriver
+        WHERE idTeam = ?");
+        $stmt->bind_param('i', $idTeam);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
+
+    public function getTeamById($teamId) {
+        $stmt = $this->db->prepare("SELECT * FROM Team WHERE idTeam = ?");
+        $stmt->bind_param('i', $teamId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
