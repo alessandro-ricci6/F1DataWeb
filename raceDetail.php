@@ -7,5 +7,6 @@ if(isset($_GET['raceId'])) {
 
 $templateParams['title'] = 'F1Data - Race Detail';
 $templateParams['race'] = $db->getRaceById($raceId);
+$templateParams['name'] = 'race/racePage.php';
 
 require 'template/base.php';

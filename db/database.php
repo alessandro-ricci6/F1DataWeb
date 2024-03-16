@@ -68,7 +68,7 @@ class DatabaseHelper {
     }
 
     public function getRaceById($raceId) {
-        $stmt = $this->db->prepare("SELECT Race.laps, Race.round, Race.raceType, Track.trackName, Track.trackLength, Championship.season
+        $stmt = $this->db->prepare("SELECT Race.*, Track.*, Championship.season
         FROM Race INNER JOIN Track ON Race.idTrack = Track.idTrack 
         INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
         WHERE idRace = ?");
@@ -221,6 +221,40 @@ class DatabaseHelper {
         WHERE Race.idChampionship = ?
         ORDER BY Championship.season, Race.round");
         $stmt->bind_param('i', $seasonId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getResultOfRace($raceId) {
+        $stmt = $this->db->prepare("SELECT RaceResult.*, Driver.*, Team.* FROM RaceResult
+        INNER JOIN Driver ON RaceResult.idDriver = Driver.idDriver
+        INNER JOIN Team ON RaceResult.idTeam = Team.idTeam
+        WHERE idRace = ?");
+        $stmt->bind_param('i', $raceId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getFastestLapOfRace($raceId) {
+        $stmt = $this->db->prepare("SELECT RaceResult.*, Driver.* FROM RaceResult
+        INNER JOIN Driver ON RaceResult.idDriver = Driver.idDriver
+        WHERE idRace = ? ORDER BY fastestLap LIMIT 1");
+        $stmt->bind_param('i', $raceId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getQualiResultOfRace($raceId) {
+        $stmt = $this->db->prepare("SELECT StartingGrid.*, Driver.* FROM StartingGrid
+        INNER JOIN Driver ON StartingGrid.idDriver = Driver.idDriver
+        WHERE idRace = ?");
+        $stmt->bind_param('i', $raceId);
         $stmt->execute();
         $result = $stmt->get_result();
 
