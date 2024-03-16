@@ -261,4 +261,29 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getAllDriverWins() {
+        $stmt = $this->db->prepare("SELECT Driver.*, COUNT(idRace) AS winsNumber
+        FROM Driver
+        INNER JOIN RaceResult ON Driver.idDriver = RaceResult.idDriver
+        WHERE position = 1 GROUP BY idDriver
+        ORDER BY winsNumber DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    //Driver never went in points
+    public function neverPointsDriver() {
+        $stmt = $this->db->prepare("SELECT *, COUNT(RaceResult.idRaceResult) AS racePartecipation
+        FROM Driver
+        INNER JOIN RaceResult ON Driver.idDriver = RaceResult.idDriver
+        GROUP BY RaceResult.idDriver HAVING MIN(position) >= 10
+        ORDER BY racePartecipation DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
