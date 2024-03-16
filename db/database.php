@@ -278,8 +278,22 @@ class DatabaseHelper {
         $stmt = $this->db->prepare("SELECT *, COUNT(RaceResult.idRaceResult) AS racePartecipation
         FROM Driver
         INNER JOIN RaceResult ON Driver.idDriver = RaceResult.idDriver
-        GROUP BY RaceResult.idDriver HAVING MIN(position) >= 10
+        GROUP BY RaceResult.idDriver HAVING MIN(position) > 10
         ORDER BY racePartecipation DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDriverWithTotPoint($points) {
+        $stmt = $this->db->prepare("SELECT *, SUM(RaceResult.points) AS totPoints
+        FROM Driver
+        INNER JOIN RaceResult ON Driver.idDriver = RaceResult.idDriver
+        GROUP BY RaceResult.idDriver
+        HAVING SUM(points) >= ?
+        ORDER BY totPoints DESC");
+        $stmt->bind_param('i', $points);
         $stmt->execute();
         $result = $stmt->get_result();
 

@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
 
-                <tbody id="driverTableBody">
+                <tbody>
                     <?php foreach($winsDriver as $driver): ?>
 
                     <tr>
@@ -73,12 +73,39 @@
                     </tr>
                 </thead>
 
-                <tbody id="driverTableBody">
+                <tbody>
                     <?php foreach($db->neverPointsDriver() as $driver): ?>
 
                     <tr>
                         <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
                         <td><?php echo $driver['racePartecipation']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 class="mt-5 pt-3 w-75 border-top border-dark-subtle">Search driver with at least total amount points scored:</h4>
+        <p>Normal and Sprint races</p>
+        <label for="pointInput">Points:</label>
+        <div>
+            <input class="border border-dark rounded" type="number" name="pointInput" id="pointInput">
+            <button class="btn btn-dark" id="pointBtn"><i class="fa-solid fa-arrow-right"></i></button></div>
+        <div class="tableDiv col-7 mt-4">
+            <table class="table text-center table-striped" id="victoryDriverTable">
+                <thead class="sticky-top">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Number of points</th>
+                    </tr>
+                </thead>
+
+                <tbody id="pointsTableBody">
+                    <?php foreach($db->getDriverWithTotPoint(0) as $driver): ?>
+
+                    <tr>
+                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
+                        <td><?php echo $driver['totPoints']; ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

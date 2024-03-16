@@ -41,7 +41,44 @@ function filterNationality(){
             }
         });
     })
+}
 
+function updatePointTable(pointsList) {
+    tableBody = document.getElementById("pointsTableBody")
+    while (tableBody.firstChild) {
+        tableBody.removeChild(tableBody.firstChild);
+    }
+
+    for(const index in pointsList){
+        tr = document.createElement("tr")
+        driver = pointsList[index]
+        tr.innerHTML = `
+        <td><a href="./driverDetail.php?driverId=${driver.idDriver}">${driver.driverName + " " + driver.driverSurname}</a></td>
+        <td>${driver.totPoints}</td>`
+        tableBody.appendChild(tr)
+    }
+}
+
+function searchPoints(){
+    pointInput = document.getElementById("pointInput")
+    pointBtn = document.getElementById("pointBtn")
+    pointBtn.addEventListener("click", function(){
+        console.log(pointInput.value)
+        $.ajax({
+            method: "POST",
+            url: "./functions/driver.php",
+            data: {
+                points: pointInput.value,
+                action: "totPoints",
+            },
+            success: function(response) {
+                data = JSON.parse(response)
+                console.log(data)
+                updatePointTable(data)
+            }
+        })
+    })
 }
 
 $(document).ready(filterNationality)
+$(document).ready(searchPoints)
