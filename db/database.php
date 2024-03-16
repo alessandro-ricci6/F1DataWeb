@@ -300,4 +300,19 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getDriverWithOneWinInSeason() {
+        $stmt = $this->db->prepare("SELECT Driver.*, COUNT(DISTINCT Championship.season) AS numSeason
+        FROM Driver
+        INNER JOIN RaceResult ON RaceResult.idDriver = Driver.idDriver
+        INNER JOIN Race ON RaceResult.idRace = Race.idRace
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        WHERE RaceResult.position = 1
+        GROUP BY Driver.idDriver
+        ORDER BY numSeason DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

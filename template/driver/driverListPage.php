@@ -112,5 +112,28 @@
             </table>
         </div>
 
+        <h4 class="mt-5 pt-3 w-75 border-top border-dark-subtle">Driver with at least 1 win for season:</h4>
+        <p>Normal and Sprint races</p>
+        <div class="tableDiv col-7 mt-4">
+            <table class="table text-center table-striped">
+                <thead class="sticky-top">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Number of season</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php foreach($db->getDriverWithOneWinInSeason() as $driver): ?>
+
+                    <tr>
+                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
+                        <td><?php echo $driver['numSeason']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
     </main>
     <script src="./script/driverList.js"></script>
