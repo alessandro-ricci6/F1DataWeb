@@ -52,6 +52,7 @@
 							<th scope="col">Position</th>
                             <th scope="col">Fastest Lap</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Team</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,12 +61,13 @@
                         ?>
                         <tr>
 							<td><?php echo $result['trackName']; ?></td>
-                            <td><?php echo $result['raceType'] ?></td>
-							<td><?php echo $result['season'] ?></td>
+                            <td><?php echo $result['raceType']; ?></td>
+							<td><?php echo $result['season']; ?></td>
 							<td><?php echo $result['round']; ?></td>
-							<td><?php echo $result['position'] ?></td>
+							<td><?php echo $result['position']; ?></td>
                             <td><?php echo $result['fastestLap'];?></td>
                             <td><?php echo $result['endStatus']; ?></td>
+                            <td><?php echo $result['teamName']; ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

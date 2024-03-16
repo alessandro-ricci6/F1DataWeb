@@ -85,7 +85,8 @@ class DatabaseHelper {
         INNER JOIN Race ON Race.idRace = RaceResult.idRace
         INNER JOIN Track ON Race.idTrack = Track.idTrack
         INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
-        WHERE idDriver = ? ORDER BY Race.idRace ASC");
+        INNER JOIN Team ON RaceResult.idTeam = Team.idTeam
+        WHERE idDriver = ? ORDER BY Championship.season, Race.round");
         $stmt->bind_param('i', $driverId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -99,7 +100,7 @@ class DatabaseHelper {
         INNER JOIN Race ON Race.idRace = StartingGrid.idRace
         INNER JOIN Track ON Race.idTrack = Track.idTrack
         INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
-        WHERE idDriver = ? ORDER BY Race.idRace ASC");
+        WHERE idDriver = ? ORDER BY Championship.season, Race.round");
         $stmt->bind_param('i', $driverId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -193,4 +194,37 @@ class DatabaseHelper {
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getAllRaces() {
+        $stmt = $this->db->prepare("SELECT Race.*, Championship.season, Track.* FROM Race
+        INNER JOIN Championship ON Race.idChampionship  = Championship.idChampionship
+        INNER JOIN Track ON Track.idTrack = Race.idTrack
+        ORDER BY Championship.season, Race.round");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllSeason() {
+        $stmt = $this->db->prepare("SELECT * FROM Championship");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getRacesBySeasonId($seasonId) {
+        $stmt = $this->db->prepare("SELECT Race.*, Championship.season, Track.* FROM Race
+        INNER JOIN Championship ON Race.idChampionship  = Championship.idChampionship
+        INNER JOIN Track ON Track.idTrack = Race.idTrack
+        WHERE Race.idChampionship = ?
+        ORDER BY Championship.season, Race.round");
+        $stmt->bind_param('i', $seasonId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

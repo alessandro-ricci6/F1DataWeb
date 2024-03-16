@@ -9,6 +9,6 @@ $driver = $db->getSingleDriver($driverId);
 
 $templateParams['driver'] = $driver;
 $templateParams['title'] = 'F1Data - ' . $driver['driverName'] . ' ' . $driver['driverSurname'];
-$templateParams['name'] = 'driverPage.php';
+$templateParams['name'] = 'driver/driverPage.php';
 
 require 'template/base.php';
