@@ -31,7 +31,7 @@
                     <tr class="align-middle">
                         <td><?php echo $race['season'] ?></td>
                         <td><?php echo $race['round'] ?></td>
-                        <td><a href="#"><?php echo $race['trackName'] ?></a></td>
+                        <td><a href="./trackDetail.php?trackId=<?php echo $race['idTrack'];?>"><?php echo $race['trackName'] ?></a></td>
                         <td><?php echo $race['city'] . ', ' . $race['country'] ?></td>
                         <td><?php echo $race['raceType'] ?></td>
 						<td>

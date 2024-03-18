@@ -26,6 +26,14 @@ class DatabaseHelper {
         return $result->fetch_row()[0];
     }
 
+    public function getNumberOfTracks() {
+        $stmt = $this->db->prepare("SELECT count(idTrack) FROM Track");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_row()[0];
+    }
+
     public function getNumberOfRaces() {
         $stmt = $this->db->prepare("SELECT count(idRace) FROM Race");
         $stmt->execute();
@@ -309,6 +317,26 @@ class DatabaseHelper {
         WHERE RaceResult.position = 1
         GROUP BY Driver.idDriver
         ORDER BY numSeason DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTrackById($trackId) {
+        $stmt = $this->db->prepare("SELECT * FROM Track WHERE idTrack = ?");
+        $stmt->bind_param('i', $trackId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getRacesOnTrack($trackId) {
+        $stmt = $this->db->prepare("SELECT Race.*, Championship.season FROM Race
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        WHERE idTrack = ?");
+        $stmt->bind_param('i', $trackId);
         $stmt->execute();
         $result = $stmt->get_result();
 
