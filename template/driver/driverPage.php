@@ -17,8 +17,8 @@
         </div>
 
 		<div class="border-top" style="height: 50%;">
-        <h4>Contracts</h4>
-			<div class="tableDiv my-4 mx-4">
+        <h4 class="mt-3">Contracts</h4>
+			<div class="tableDiv mt-4 mx-4">
 				<table class="table">
 					<thead class="sticky-top">
 					<tr>
@@ -39,6 +39,7 @@
 					</tbody>
 				</table>
 			</div>
+            <a href="contract.php" class="btn w-100 mb-4">Add Contract</a>
 
             <h4>Race results</h4>
 			<div class="tableDiv my-4 mx-4">
