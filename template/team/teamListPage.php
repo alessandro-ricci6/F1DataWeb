@@ -26,7 +26,7 @@
                 <tbody id="teamTableBody">
                     <?php foreach ($teamList as $team):?>
                     <tr>
-                        <td><a href="./teamDetail.php?teamId=<?php echo $team['idTeam']; ?>"><?php echo $team['teamName']; ?></a></td>
+                        <td><a href="./team.php?page=detail&teamId=<?php echo $team['idTeam']; ?>"><?php echo $team['teamName']; ?></a></td>
                         <td><?php echo $team['nationality']; ?></td>
                         <td><?php echo $team['headquarter']; ?></td>
                     </tr>

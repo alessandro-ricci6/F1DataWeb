@@ -8,7 +8,7 @@ function updateTable(teamList){
         tr = document.createElement("tr")
         team = teamList[index]
         tr.innerHTML = `
-        <td><a href="#">${team.teamName}</a></td>
+        <td><a href="team.php?page=detail&teamId=${team.idTeam}">${team.teamName}</a></td>
         <td>${team.nationality}</td>
         <td>${team.headquarter}</td>`
         tableBody.appendChild(tr)

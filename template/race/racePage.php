@@ -42,11 +42,11 @@
                         ?>
                         <tr>
 							<td><?php echo $result['position']; ?></td>
-                            <td><a href="driverDetail.php?driverId=<?php echo $result['idDriver'] ?>"><?php echo $result['driverName'] . ' ' . $result['driverSurname']; ?></a></td>
+                            <td><a href="driver.php?page=detail&driverId=<?php echo $result['idDriver'] ?>"><?php echo $result['driverName'] . ' ' . $result['driverSurname']; ?></a></td>
                             <td><?php echo $result['fastestLap'];?></td>
                             <td><?php echo $result['endStatus']; ?></td>
                             <td><?php echo $result['points']; ?></td>
-                            <td><a href="teamDetail.php?teamId=<?php echo $result['idTeam'] ?>"><?php echo $result['teamName']; ?></a></td>
+                            <td><a href="team.php?page=detail&teamId=<?php echo $result['idTeam'] ?>"><?php echo $result['teamName']; ?></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -68,7 +68,7 @@
                         foreach($qualiResult as $quali):
                         ?>
                         <tr>
-							<td><a href="driverDetail.php?driverId=<?php echo $quali['idDriver'] ?>"><?php echo $quali['driverName'] . ' ' . $quali['driverSurname']; ?></a></td>
+							<td><a href="driver.php?page=detail&driverId=<?php echo $quali['idDriver'] ?>"><?php echo $quali['driverName'] . ' ' . $quali['driverSurname']; ?></a></td>
 							<td><?php echo $quali['position'] ?></td>
                             <td><?php echo $quali['qualificationTime'];?></td>
                         </tr>

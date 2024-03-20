@@ -29,7 +29,7 @@
                     <?php foreach($drivers as $driver): ?>
 
                     <tr>
-                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
+                        <td><a href="./driver.php?page=detail&driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
                         <td><?php echo $driver['dateOfBirth']; ?></td>
                         <td><?php echo $driver['nationality']; ?></td>
                         <td><?php echo $driver['permanentNumber']; ?></td>
@@ -54,7 +54,7 @@
                     <?php foreach($winsDriver as $driver): ?>
 
                     <tr>
-                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
+                        <td><a href="./driver.php?page=detail&driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
                         <td><?php echo $driver['winsNumber']; ?></td>
                     </tr>
                     <?php endforeach; ?>
@@ -77,7 +77,7 @@
                     <?php foreach($db->neverPointsDriver() as $driver): ?>
 
                     <tr>
-                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
+                        <td><a href="./driver.php?page=detail&driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
                         <td><?php echo $driver['racePartecipation']; ?></td>
                     </tr>
                     <?php endforeach; ?>
@@ -104,7 +104,7 @@
                     <?php foreach($db->getDriverWithTotPoint(0) as $driver): ?>
 
                     <tr>
-                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
+                        <td><a href="./driver.php?page=detail&driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
                         <td><?php echo $driver['totPoints']; ?></td>
                     </tr>
                     <?php endforeach; ?>
@@ -127,7 +127,7 @@
                     <?php foreach($db->getDriverWithOneWinInSeason() as $driver): ?>
 
                     <tr>
-                        <td><a href="./driverDetail.php?driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
+                        <td><a href="./driver.php?page=detail&driverId=<?php echo $driver['idDriver']; ?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></a></td>
                         <td><?php echo $driver['numSeason']; ?></td>
                     </tr>
                     <?php endforeach; ?>

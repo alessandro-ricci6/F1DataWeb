@@ -14,7 +14,7 @@ function updateTable(racesList) {
         <td>${race['city'] + ', ' + race['country']}</td>
         <td>${race['raceType']}</td>
 		<td>
-			<a href="./raceDetail.php?raceId=${race['idRace']}" class="btn btn-dark">Information</a>
+			<a href="race.php?page=detail&raceId=${race['idRace']}" class="btn btn-dark">Information</a>
 		</td>`
         tableBody.appendChild(tr)
     }

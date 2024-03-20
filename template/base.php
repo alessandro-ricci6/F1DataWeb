@@ -31,7 +31,7 @@
     				<div class="collapse px-3" id="driver-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
     						<li><a href="../driver/addDriver.html" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
-    						<li><a href="./driverList.php" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
+    						<li><a href="./driver.php?page=list" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
     			</li>
@@ -42,7 +42,7 @@
     				<div class="collapse px-3" id="team-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
     						<li><a href="../team/addTeam.html" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
-    						<li><a href="./teamList.php" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
+    						<li><a href="./team.php?page=list" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
     			</li>
@@ -64,7 +64,7 @@
     				<div class="collapse px-3" id="race-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
     						<li><a href="../race/addRace.html" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
-    						<li><a href="./raceList.php" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
+    						<li><a href="./race.php?page=list" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
     			</li>

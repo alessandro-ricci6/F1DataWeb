@@ -24,7 +24,7 @@ $contracts = $db->getTeamContract($team['idTeam']);
             <tbody>
                 <?php foreach($contracts as $contract): ?>
                 <tr>
-                    <td><a href="driverDetail.php?driverId=<?php echo $contract['idDriver'] ?>"><?php echo $contract['driverName'] . ' ' . $contract['driverSurname'];?></a></td>
+                    <td><a href="driver.php?page=detail&driverId=<?php echo $contract['idDriver'] ?>"><?php echo $contract['driverName'] . ' ' . $contract['driverSurname'];?></a></td>
                     <td><?php echo $contract['signingYear']; ?></td>
                     <td><?php echo $contract['expirationYear']; ?></td>
                 </tr>

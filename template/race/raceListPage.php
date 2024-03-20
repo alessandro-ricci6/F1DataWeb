@@ -35,7 +35,7 @@
                         <td><?php echo $race['city'] . ', ' . $race['country'] ?></td>
                         <td><?php echo $race['raceType'] ?></td>
 						<td>
-							<a href="./raceDetail.php?raceId=<?php echo $race['idRace'] ?>" class="btn btn-dark">Information</a>
+							<a href="race.php?page=detail&raceId=<?php echo $race['idRace'] ?>" class="btn btn-dark">Information</a>
 						</td>
                     </tr>
                     <?php endforeach; ?>

@@ -1,6 +1,3 @@
-<?php
-ini_set('display_errors', 1);
-?>
 <!-- Div with database info (Number of driver, team, season, races...) -->
 <main class="float-end d-flex flex-column justify-content-center align-items-center">
     <div class="infoDivHome">

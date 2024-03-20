@@ -16,7 +16,7 @@ function updateTable(driverList){
         tr = document.createElement("tr")
         driver = driverList[index]
         tr.innerHTML = `
-        <td><a href="./driverDetail.php?driverId=${driver.idDriver}">${driver.driverName + " " + driver.driverSurname}</a></td>
+        <td><a href="driver.php?page=detail&driverId=${driver.idDriver}">${driver.driverName + " " + driver.driverSurname}</a></td>
         <td>${driver.dateOfBirth}</td>
         <td>${driver.nationality}</td>
         <td>${getDriverNumber(driver.permanentNumber)}</td>`
@@ -53,7 +53,7 @@ function updatePointTable(pointsList) {
         tr = document.createElement("tr")
         driver = pointsList[index]
         tr.innerHTML = `
-        <td><a href="./driverDetail.php?driverId=${driver.idDriver}">${driver.driverName + " " + driver.driverSurname}</a></td>
+        <td><a href="driver.php?page=detail&driverId=${driver.idDriver}">${driver.driverName + " " + driver.driverSurname}</a></td>
         <td>${driver.totPoints}</td>`
         tableBody.appendChild(tr)
     }

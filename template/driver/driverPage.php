@@ -33,7 +33,7 @@
                         <tr>
                             <td><?php echo $contract['signingYear']; ?></td>
                             <td><?php echo $contract['expirationYear']; ?></td>
-                            <td><a href="teamDetail.php?teamId=<?php echo $contract['idTeam']; ?>"><?php echo $contract['teamName'] ?></a></td>
+                            <td><a href="team.php?page=detail&teamId=<?php echo $contract['idTeam']; ?>"><?php echo $contract['teamName'] ?></a></td>
                         </tr>
                         <?php endforeach; ?>
 					</tbody>
@@ -54,6 +54,7 @@
                             <th scope="col">Fastest Lap</th>
                             <th scope="col">Status</th>
                             <th scope="col">Team</th>
+                            <th scope="col">Race info</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,6 +70,7 @@
                             <td><?php echo $result['fastestLap'];?></td>
                             <td><?php echo $result['endStatus']; ?></td>
                             <td><?php echo $result['teamName']; ?></td>
+                            <td><a href="race.php?page=detail&raceId=<?php echo $result['idRace'] ?>" class="btn btn-dark">Information</a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
