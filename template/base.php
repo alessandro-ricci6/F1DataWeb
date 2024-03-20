@@ -75,7 +75,7 @@
     				<div class="collapse px-3" id="season-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
     						<li><a href="../season/addSeason.html" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
-    						<li><a href="../season/listSeason.html" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
+    						<li><a href="./season.php?page=list" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
     			</li>

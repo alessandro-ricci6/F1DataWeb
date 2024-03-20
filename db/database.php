@@ -382,4 +382,13 @@ class DatabaseHelper {
         $stmt->execute();
     }
 
+    public function getSeasonById($id){
+        $stmt = $this->db->prepare("SELECT * FROM Championship WHERE idChampionship = ?");
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }
