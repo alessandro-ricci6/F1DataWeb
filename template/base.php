@@ -48,12 +48,12 @@
     			</li>
     			<li class="listEl mb-1">
     				<button class="btn btn-dark btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#contract-collapse" aria-expanded="false">
-    					Contract
+    					Tracks
     				</button>
     				<div class="collapse px-3" id="contract-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
     						<li><a href="./contract.php?driverId=1" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
-    						<li><a href="../contract/listContract.html" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
+    						<li><a href="./track.php?page=list" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
     			</li>

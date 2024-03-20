@@ -348,7 +348,31 @@ class DatabaseHelper {
         (?, ?, ?, ?)");
         $stmt->bind_param('iiii', $driverId, $teamId, $signYear, $expYear);
         $stmt->execute();
+    }
 
+    public function getAllTracks() {
+        $stmt = $this->db->prepare("SELECT * FROM Track");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTracksCountry() {
+        $stmt = $this->db->prepare("SELECT DISTINCT country FROM Track");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTrackByCountry($country) {
+        $stmt = $this->db->prepare("SELECT * FROM Track WHERE country = ?");
+        $stmt->bind_param('s', $country);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
 }
