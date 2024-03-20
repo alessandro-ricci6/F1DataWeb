@@ -52,7 +52,7 @@
     				</button>
     				<div class="collapse px-3" id="contract-collapse">
     					<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-    						<li><a href="./contract.php" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
+    						<li><a href="./contract.php?driverId=1" class="link-light d-inline-flex text-decoration-none rounded">Add</a></li>
     						<li><a href="../contract/listContract.html" class="link-light d-inline-flex text-decoration-none rounded">List</a></li>
     					</ul>
     				</div>
