@@ -19,6 +19,11 @@ switch ($_GET['page']) {
         $templateParams['name'] = 'driver/driverPage.php';
         break;
 
+    case 'add':
+        $templateParams['name'] = 'driver/addDriver.php';
+        $templateParams['title'] = 'F1Data - Add Driver';
+        break;
+
     default:
         # code...
         break;

@@ -375,4 +375,11 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function addDriver($name, $surname, $nationality, $number, $birth) {
+        $stmt = $this->db->prepare("INSERT INTO Driver(driverName, driverSurname, nationality, permanentNumber, dateOfBirth) VALUE
+        (?, ?, ?, ?, ?)");
+        $stmt->bind_param('sssis', $name, $surname, $nationality, $number, $birth);
+        $stmt->execute();
+    }
+
 }

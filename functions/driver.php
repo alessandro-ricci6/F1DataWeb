@@ -21,4 +21,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             echo json_encode($data);
         }
     }
+    elseif($_POST['action'] == 'add') {
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+        $nationality = $_POST['nationality'];
+        $number = $_POST['number'];
+        $birth = date_create_from_format('Y-m-d', $_POST['birth']);
+        $db->addDriver($name, $surname, $nationality, $number, $birth->format('Y-m-d'));
+    }
 }
