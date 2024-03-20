@@ -5,8 +5,6 @@
     ?>
         <div class="driverForm m-4 col-5 text-center">
             <h2>Add a contract:</h2>
-            <form action="#">
-
                 <div class="py-2">
                     <label for="teamSelect">Driver: </label>
                     <select class="form-select border-dark" name="driverSelect" id="driverSelect" required>
@@ -35,7 +33,7 @@
                     <input class="form-control border border-dark" type="number" name="expirationInput" id="expirationInput" required>
                 </div>
 
-                <input class="btn btn-dark form-control mt-3" type="submit" value="Add contract">
-            </form>
+                <input class="btn btn-dark form-control mt-3" type="submit" value="Add contract" id="addContractBtn">
         </div>
     </main>
+    <script src="./script/contract.js"></script>

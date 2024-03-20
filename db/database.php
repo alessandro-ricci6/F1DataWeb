@@ -342,5 +342,13 @@ class DatabaseHelper {
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    
+    public function addContract($driverId, $teamId, $signYear, $expYear) {
+        $stmt = $this->db->prepare("INSERT INTO Contract(idDriver, idTeam, signingYear, expirationYear) VALUE
+        (?, ?, ?, ?)");
+        $stmt->bind_param('iiii', $driverId, $teamId, $signYear, $expYear);
+        $stmt->execute();
+
+    }
 
 }
