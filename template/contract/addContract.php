@@ -9,7 +9,7 @@
                     <label for="teamSelect">Driver: </label>
                     <select class="form-select border-dark" name="driverSelect" id="driverSelect" required>
                         <?php foreach($drivers as $driver): ?>
-                            <option value="<?php echo $driver['idDriver'];?>"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></option>
+                            <option value="<?php echo $driver['idDriver'];?>" <?php echo isSelected($templateParams['driverId'], $driver['idDriver']); ?>><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

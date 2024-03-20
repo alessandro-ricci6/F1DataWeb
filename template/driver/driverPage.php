@@ -39,7 +39,7 @@
 					</tbody>
 				</table>
 			</div>
-            <a href="contract.php" class="btn w-100 mb-4">Add Contract</a>
+            <a href="contract.php?driverId=<?php echo $driver['idDriver']; ?>" class="btn w-100 mb-4">Add Contract</a>
 
             <h4>Race results</h4>
 			<div class="tableDiv my-4 mx-4">
