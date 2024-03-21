@@ -1,6 +1,8 @@
 <main class="float-end d-flex align-items-center flex-column">
-<?php $season = $templateParams['season']; 
-    $races = $db->getRacesBySeasonId($season['idChampionship'])?>
+<?php $season = $templateParams['season'];
+    $races = $db->getRacesBySeasonId($season['idChampionship']);
+    $driverStanding = $templateParams['driverStanding'];
+    $teamStanding = $templateParams['teamStanding']; ?>
         <div class="p-4 text-center" style="margin-top:20px">
             <h3 class="p-2 mx-auto"><?php echo $season['season'] ?></h3>
             <ul class="list-group list-group-horizontal col-10 mx-3">
@@ -8,7 +10,7 @@
             </ul>
         </div>
 
-        <div class="d-flex border-top" style="height: 50%;">
+        <div class="d-flex border-top" style="height: 80%;">
             <div class="tableDiv my-4 mx-4 text-center">
                 <h4>Races</h4>
                 <table class="table">
@@ -33,7 +35,7 @@
                 </table>
             </div>
 
-            <div class="tableDiv my-4 mx-4 text-center">
+            <div class="tableDiv mt-4 mx-4 text-center">
                 <h4>Team Standing</h4>
                 <table class="table">
                     <thead>
@@ -44,11 +46,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php $tPosition = 1;
+                        foreach($teamStanding as $t):?>
                         <tr>
-                            <td>1</td>
-                            <td>Red Bull</td>
-                            <td>392</td>
+                        <tr>
+                            <td><?php echo $tPosition ?></td>
+                            <td><a href="team.php?page=detail&teamId=<?php echo $t['idTeam'] ?>"><?php echo $t['teamName'] ?></a></td>
+                            <td><?php echo $t['total_points']; ?></td>
                         </tr>
+                        <?php $tPosition += 1;
+                        endforeach;
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -64,11 +72,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $dPosition = 1;
+                        foreach($driverStanding as $d): ?>
                         <tr>
-                            <td>1</td>
-                            <td>Max Verstappen</td>
-                            <td>231</td>
+                            <td><?php echo $dPosition ?></td>
+                            <td><a href="driver.php?page=detail&driverId=<?php echo $d['idDriver'] ?>"><?php echo $d['driver_name'] ?></a></td>
+                            <td><?php echo $d['total_points']?></td>
                         </tr>
+                        <?php $dPosition += 1;
+                    endforeach; ?>
                     </tbody>
                 </table>
             </div>

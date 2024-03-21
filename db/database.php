@@ -391,4 +391,24 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getDriverChampResult($seasonId) {
+        $stmt = $this->db->prepare("SELECT * FROM DriverChampResult WHERE idChampionship = ?
+        ORDER BY total_points DESC");
+        $stmt->bind_param('i', $seasonId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTeamChampResult($seasonId) {
+        $stmt = $this->db->prepare("SELECT * FROM TeamChampResult WHERE idChampionship = ?
+        ORDER BY total_points DESC");
+        $stmt->bind_param('i', $seasonId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

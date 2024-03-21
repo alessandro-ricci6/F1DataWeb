@@ -16,6 +16,8 @@ switch ($_GET['page']) {
         $templateParams['title'] = 'F1Data - ' . $season['season'];
         $templateParams['name'] = 'season/seasonPage.php';
         $templateParams['season'] = $season;
+        $templateParams['driverStanding'] = $db->getDriverChampResult($season['idChampionship']);
+        $templateParams['teamStanding'] = $db->getTeamChampResult($season['idChampionship']);
         break;
 
     default:
