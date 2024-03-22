@@ -454,4 +454,11 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function addTrack($trackName, $country, $city, $length) {
+        $stmt = $this->db->prepare("INSERT INTO Track(trackName, country, city, trackLength)
+        VALUES (?, ?, ?, ?)");
+        $stmt->bind_param('sssi', $trackName, $country, $city, $length);
+        $stmt->execute();
+    }
+
 }

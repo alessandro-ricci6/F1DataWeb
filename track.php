@@ -20,6 +20,11 @@ switch ($_GET['page']) {
         $templateParams['name'] = 'track/trackList.php';
         break;
 
+    case 'add':
+        $templateParams['title'] = 'F1Data - Add Track';
+        $templateParams['name'] = 'track/addTrack.php';
+        break;
+
     default:
         # code...
         break;

@@ -26,4 +26,4 @@
                 <input class="btn btn-dark form-control mt-3" type="submit" value="Add team" onclick="addTeam()" id="addTeamBtn">
         </div>
     </main>
-    <script src="./script/addTeam.js"></script>
+    <script src="./script/addScript.js"></script>

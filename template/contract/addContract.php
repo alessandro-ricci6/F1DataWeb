@@ -36,4 +36,4 @@
                 <input class="btn btn-dark form-control mt-3" type="submit" value="Add contract" id="addContractBtn">
         </div>
     </main>
-    <script src="./script/contract.js"></script>
+    <script src="./script/addScript.js"></script>
