@@ -411,4 +411,11 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function addTeam($name, $nationality, $headquarter) {
+        $stmt = $this->db->prepare("INSERT INTO Team(teamName, nationality, headquarter) VALUE
+        (?, ?, ?)");
+        $stmt->bind_param('sss', $name, $nationality, $headquarter);
+        $stmt->execute();
+    }
+
 }

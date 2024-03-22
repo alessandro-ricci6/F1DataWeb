@@ -19,6 +19,11 @@ switch ($_GET['page']) {
         $templateParams['title'] = 'F1Data - ' . $team['teamName'];
         break;
     
+    case 'add':
+        $templateParams['title'] = 'F1Data - Add Team';
+        $templateParams['name'] = 'team/addTeam.php';
+        break;
+
     default:
         # code...
         break;
