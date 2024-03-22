@@ -29,6 +29,13 @@ function validateContractForm(signYear, expYear) {
     return false
 }
 
+function validateChampionshipForm(season, round){
+    if(season > 1949 & season < 2150 & round != 0){
+        return true
+    }
+    return false
+}
+
 function addTeam(){
     teamName = document.getElementById("nameInput")
     nationality = document.getElementById("nationalityInput")
@@ -134,4 +141,24 @@ function addContract(){
             alert("Error")
         }
     })
+}
+
+function addChampionship(){
+    seasonYear = document.getElementById("seasonInput").value
+    round = document.getElementById("roundInput").value
+    console.log(seasonYear + ' ' + round)
+    if(validateChampionshipForm(seasonYear, round)){
+        $.ajax({
+            type: "POST",
+            url: "functions/season.php",
+            data: {
+                action:'add',
+                season: seasonYear,
+                round: round
+            },
+            success: function (response) {
+                
+            }
+        });
+    }
 }

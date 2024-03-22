@@ -461,4 +461,11 @@ class DatabaseHelper {
         $stmt->execute();
     }
 
+    public function addChampionship($season, $round){
+        $stmt = $this->db->prepare("INSERT INTO Championship(season, roundNumber)
+        VALUES (?, ?)");
+        $stmt->bind_param('ii', $season, $round);
+        $stmt->execute();
+    }
+
 }

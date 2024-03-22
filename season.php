@@ -20,6 +20,11 @@ switch ($_GET['page']) {
         $templateParams['teamStanding'] = $db->getTeamChampResult($season['idChampionship']);
         break;
 
+    case 'add':
+        $templateParams['title'] = 'F1Data - Add Championship';
+        $templateParams['name'] = 'season/addSeason.php';
+        break;
+
     default:
         # code...
         break;
