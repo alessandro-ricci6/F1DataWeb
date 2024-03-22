@@ -418,4 +418,30 @@ class DatabaseHelper {
         $stmt->execute();
     }
 
+    public function getSeasonOfDriver($driverId) {
+        $stmt = $this->db->prepare("SELECT Championship.* FROM Race
+        INNER JOIN RaceResult ON Race.idRace = RaceResult.idRace
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        WHERE RaceResult.idDriver = ?
+        GROUP BY Championship.idChampionship");
+        $stmt->bind_param('i', $driverId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getRaceOfDriverInSeason($driver, $season) {
+        $stmt = $this->db->prepare("SELECT * FROM RaceResult
+        INNER JOIN Race ON Race.idRace = RaceResult.idRace
+        INNER JOIN Track ON Race.idTrack = Track.idTrack
+        WHERE idDriver = ? AND idChampionship = ?
+        ORDER BY round");
+        $stmt->bind_param('ii', $driver, $season);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

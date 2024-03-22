@@ -29,4 +29,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $birth = date_create_from_format('Y-m-d', $_POST['birth']);
         $db->addDriver($name, $surname, $nationality, $number, $birth->format('Y-m-d'));
     }
+    elseif($_POST['action'] == 'result'){
+        $driverId = $_POST['driver'];
+        $season = $_POST['season'];
+        $data = $db->getRaceOfDriverInSeason($driverId, $season);
+
+        echo json_encode($data);
+    }
 }

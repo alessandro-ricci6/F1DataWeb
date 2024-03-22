@@ -2,7 +2,8 @@
 <?php $driver = $templateParams['driver'];
     $results = $db->getDriverResultById($driver['idDriver']);
     $qualifying = $db->getQualifyingResultById($driver['idDriver']);
-    $contracts = $db->getDriverContract($driver['idDriver']);?>
+    $contracts = $db->getDriverContract($driver['idDriver']);
+    $seasons = $db->getSeasonOfDriver($driver['idDriver'])?>
         <div class="p-4 text-center my-1">
             <h3 class="p-2"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname']; ?></h3>
             <ul class="list-group list-group-horizontal col-10 mx-3">
@@ -106,6 +107,20 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="py-4">
+                <h6>Select the season:</h6>
+                <select class="form-control w-25" name="seasonSelect" id="seasonSelect" data-bs-driverId="<?php echo $driver['idDriver'] ?>">
+                    <option value="" selected>No season Selected</option>
+                    <?php foreach($seasons as $s): ?>
+                        <option value="<?php echo $s['idChampionship'] ?>"><?php echo $s['season'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <p class="w-100 text-center mt-4 bold fs-5"><?php echo $driver['driverName'] . ' ' . $driver['driverSurname'] . ' ' . 'placement during season: '?><span id="yearTitle"></span></p>
+                <div class="w-100 mt-4">
+			        <canvas id="driverChart"></canvas>
+		        </div>
+            </div>
 		</div>
+        
     </main>
+    <script src="./script/driverChart.js"></script>
