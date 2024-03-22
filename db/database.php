@@ -444,4 +444,14 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function searchDriver($input) {
+        $stmt = $this->db->prepare("SELECT * FROM Driver 
+        WHERE driverName OR driverSurname LIKE '%{$input}%'
+        LIMIT 10");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 }

@@ -80,5 +80,29 @@ function searchPoints(){
     })
 }
 
+function searchDriver() {
+    $('#searchDriver').on('keyup', function() {
+        let query = $(this).val();
+        console.log(typeof query)
+        console.log(query)
+        if(query != '') {
+            $.ajax({
+                url: "functions/driver.php",
+                method: "POST",
+                data: {
+                    query: query,
+                    action: 'search',
+                },
+                success: function(data) {
+                    $('#searchPopup').html(data);
+                }
+            });
+        } else {
+            $('#searchPopup').html('');
+        }
+    })
+}
+
 $(document).ready(filterNationality)
 $(document).ready(searchPoints)
+$(document).ready(searchDriver)

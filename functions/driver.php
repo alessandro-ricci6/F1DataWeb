@@ -36,4 +36,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         echo json_encode($data);
     }
+    elseif($_POST['action'] == 'search') {
+        $query = $_POST['query'];
+        $output = "<ul class='driverSearchList w-100 px-1'>";
+        $result = $db->searchDriver($query);
+        if($result > 0) {
+            foreach($result as $driver){
+                $output .= '<li class="px-4 py-2"><a href="driver.php?page=detail&driverId=' . $driver['idDriver'] .
+                '">' . $driver['driverName'] . ' ' . $driver['driverSurname'] . '</a></li>';
+            }
+        } else {
+            $output .= '<p>Utente non trovato</p>';
+        }
+        $output .= '</ul>';
+        echo $output;
+    }
 }

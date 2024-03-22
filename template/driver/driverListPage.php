@@ -5,7 +5,17 @@
     $winsDriver = $db->getAllDriverWins();
     ?>
         <div class="col-3 text-center mt-4">
-			<h2>List of all drivers:</h2>
+            <h2>Search driver:</h2>
+            <div class="d-flex justify-content-center mb-3">
+                <div class="driverSearchDiv align-items-center">
+                    <label for="searchDriver" class="">
+                        <input type="text" name="searchDriver" class="form-control w-100" id="searchDriver">
+                    </label>
+                    <div class="z-2 position-absolute bg-light border" id="searchPopup" style="width: 220px">
+                    </div>
+                </div>
+            </div>
+			<h3>List of all drivers:</h3>
             <label for="filterSelect">Select nationality to filter drivers: </label>
             <select class="form-select my-2" name="filterSelect" id="nationalitySelect">
                 <option selected>No filter</option>
@@ -16,7 +26,7 @@
         </div>
         <div class="tableDiv col-7 mt-4">
             <table class="table text-center table-striped" id="allDriverTable">
-                <thead class="sticky-top">
+                <thead class="sticky-top z-0">
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Date of birth</th>
