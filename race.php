@@ -18,6 +18,13 @@ switch ($_GET['page']) {
         $templateParams['name'] = 'race/racePage.php';
         break;
 
+    case 'add':
+        $templateParams['title'] = 'F1Data - Add Race';
+        $templateParams['name'] = 'race/addRace.php';
+        $templateParams['season'] = $db->getAllSeason();
+        $templateParams['tracks'] = $db->getAllTracks();
+        break;
+
     default:
         # code...
         break;
