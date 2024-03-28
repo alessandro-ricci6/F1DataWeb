@@ -1,20 +1,19 @@
-const ctx = document.getElementById('driverChart');
-      
-new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
+const modal = document.getElementById('staticBackdrop');
+const modalStartYear = document.getElementById('modalStartYear');
+const modalEndYear = document.getElementById('modalEndYear');
+const modalDriverId = document.getElementById('modalDriverId');
+
+modal.addEventListener('show.bs.modal', function (event) {
+  // Get the button that triggered the modal
+  const button = event.relatedTarget;
+
+  // Extract data attributes from the button
+  const startYear = button.dataset.bsSyear;
+  const endYear = button.dataset.bsEyear;
+  const driverId = button.dataset.bsDriver;
+
+  // Set the values in the modal body
+  modalStartYear.textContent = startYear;
+  modalEndYear.textContent = endYear;
+  modalDriverId.textContent = driverId;
 });

@@ -33,7 +33,7 @@
                     <input class="form-control border border-dark" type="number" name="expirationInput" id="expirationInput" required>
                 </div>
 
-                <input class="btn btn-dark form-control mt-3" type="submit" value="Add contract" id="addContractBtn" onclick="addContract()">
+                <button class="btn btn-dark form-control mt-3" id="addContractBtn" onclick="addContract()">Add Contract</button>
         </div>
     </main>
     <script src="./script/addScript.js"></script>

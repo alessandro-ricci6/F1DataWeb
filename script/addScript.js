@@ -116,11 +116,10 @@ function addContract(){
     addBtn = document.getElementById("addContractBtn")
     driverSelect = document.getElementById("driverSelect")
     teamSelect = document.getElementById("teamSelect")
-    addBtn.addEventListener("click", function (event) {
-        driverId = driverSelect.options[driverSelect.selectedIndex].value
-        teamId = teamSelect.options[teamSelect.selectedIndex].value
-        signYear = document.getElementById("signInput")
-        expYear = document.getElementById("expirationInput")
+    driverId = driverSelect.options[driverSelect.selectedIndex].value
+    teamId = teamSelect.options[teamSelect.selectedIndex].value
+    signYear = document.getElementById("signInput")
+    expYear = document.getElementById("expirationInput")
 
         if(validateContractForm(signYear.value, expYear.value)){
             $.ajax({
@@ -135,18 +134,17 @@ function addContract(){
                 },
                 success: function (response) {
                     console.log(response)
+                    window.location.href = `./driver.php?page=detail&driverId=${driverId}`
                 }
             });
         } else {
             alert("Error")
         }
-    })
 }
 
 function addChampionship(){
     seasonYear = document.getElementById("seasonInput").value
     round = document.getElementById("roundInput").value
-    console.log(seasonYear + ' ' + round)
     if(validateChampionshipForm(seasonYear, round)){
         $.ajax({
             type: "POST",

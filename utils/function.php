@@ -22,3 +22,7 @@ function isSelected($driverId, $id) {
         return '';
     }
 }
+
+function addQualiCard() {
+    
+}

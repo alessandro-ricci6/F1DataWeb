@@ -180,7 +180,7 @@ class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getTeamContract($idTeam) {
@@ -468,4 +468,17 @@ class DatabaseHelper {
         $stmt->execute();
     }
 
+    public function deleteContract($contractId){
+        $stmt = $this->db->prepare("DELETE FROM Contract WHERE idContract = ?");
+        $stmt->bind_param('i', $contractId);
+        $stmt->execute();
+    }
+
+    public function updateContract($contractId, $expYear, $signYear, $teamId){
+        $stmt = $this->db->prepare("UPDATE Contract
+        SET idTeam = ?, expirationYear = ?, signingYear = ?
+        WHERE idContract = ?");
+        $stmt->bind_param('iiii', $teamId, $expYear, $signYear, $contractId);
+        $stmt->execute();
+    }
 }

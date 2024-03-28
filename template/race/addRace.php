@@ -50,6 +50,6 @@
                     <input class="form-control border border-dark" type="number" name="lapsInput" id="lapsInput">
                 </div>
 
-                <a class="btn btn-dark mt-3 w-50" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                <a class="btn btn-dark mt-3 w-50" href="race.php?page=addQualification"><i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </main>

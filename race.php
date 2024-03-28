@@ -25,6 +25,18 @@ switch ($_GET['page']) {
         $templateParams['tracks'] = $db->getAllTracks();
         break;
 
+    case 'addQualification':
+
+        $templateParams['title'] = 'F1Data - Add Qualification';
+        $templateParams['name'] = 'race/addQuali.php';
+        break;
+
+        case 'addResult':
+
+            $templateParams['title'] = 'F1Data - Add Resuòt';
+            $templateParams['name'] = 'race/addResult.php';
+            break;
+
     default:
         # code...
         break;
