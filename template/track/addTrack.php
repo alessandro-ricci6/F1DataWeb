@@ -21,7 +21,7 @@
             <input class="form-control border border-dark" type="number" name="lengthInput" id="lengthInput" required>
         </div>
 
-        <input class="btn btn-dark form-control mt-3" type="submit" value="Add track" id="addTrackBtn" onclick="addTrack()">
+        <button class="btn btn-dark form-control mt-3" id="addTrackBtn" onclick="addTrack()">Add Track</button>
     </div>
 </main>
 <script src="./script/addScript.js"></script>

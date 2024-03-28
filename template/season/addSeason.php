@@ -13,7 +13,7 @@
                     <input class="form-control border border-dark" type="number" name="roundInput" id="roundInput" required>
                 </div>
 
-                <input class="btn btn-dark form-control mt-3" type="submit" value="Add championship" id="addChampionshipBtn" onclick="addChampionship()">
+                <button class="btn btn-dark form-control mt-3" id="addChampionshipBtn" onclick="addChampionship()">Add Championship</button>
         </div>
     </main>
     <script src="./script/addScript.js"></script>

@@ -32,7 +32,7 @@
             <input class="form-control border border-dark" type="date" name="birthInput" id="birthInput" required>
         </div>
 
-        <input class="btn btn-dark form-control mt-3" type="submit" value="Add driver" id="addDriverBtn" onclick="addDriver()">
+        <button class="btn btn-dark form-control mt-3" id="addDriverBtn" onclick="addDriver()">Add driver</button>
     </div>
 </main>
 <script src="./script/addScript.js"></script>

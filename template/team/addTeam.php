@@ -23,7 +23,7 @@
                     <input class="form-control border border-dark" type="text" name="headquarterInput" id="headquarterInput" placeholder="City, country" required>
                 </div>
 
-                <input class="btn btn-dark form-control mt-3" type="submit" value="Add team" onclick="addTeam()" id="addTeamBtn">
+                <button class="btn btn-dark form-control mt-3" onclick="addTeam()" id="addTeamBtn">Add team</button>
         </div>
     </main>
     <script src="./script/addScript.js"></script>
