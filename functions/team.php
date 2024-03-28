@@ -18,4 +18,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $headquarter = $_POST['headquarter'];
         $db->addTeam($teamName, $nationality, $headquarter);
     }
+    elseif($_POST['action'] == 'addEmp'){
+        $empName = $_POST['name'];
+        $empSurname = $_POST['surname'];
+        $nationality = $_POST['nationality'];
+        $role = $_POST['role'];
+        $team = $_POST['team'];
+        $db->addEmployee($empName, $empSurname, $nationality, $role, $team);
+    }
 }

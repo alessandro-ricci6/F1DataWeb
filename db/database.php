@@ -481,4 +481,28 @@ class DatabaseHelper {
         $stmt->bind_param('iiii', $teamId, $expYear, $signYear, $contractId);
         $stmt->execute();
     }
+
+    public function getEmployeeOfTeam($teamId){
+        $stmt = $this->db->prepare("SELECT * FROM Employee WHERE idTeam = ?");
+        $stmt->bind_param('i', $teamId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getRoles(){
+        $stmt = $this->db->prepare("SELECT DISTINCT Employee.employeeRole FROM Employee");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function addEmployee($name, $surname, $nationality, $role, $teamId){
+        $stmt = $this->db->prepare("INSERT INTO Employee(employeeName, employeeSurname, employeeRole, nationality, idTeam)
+        VALUE (?, ?, ?, ?, ?)");
+        $stmt->bind_param('ssssi', $name, $surname, $role, $nationality, $teamId);
+        $stmt->execute();
+    }
 }

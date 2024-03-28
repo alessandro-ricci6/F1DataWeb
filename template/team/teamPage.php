@@ -2,6 +2,7 @@
 <?php
 $team = $templateParams['team'];
 $contracts = $db->getTeamContract($team['idTeam']);
+$employees = $db->getEmployeeOfTeam($team['idTeam']);
 ?>
 <div class="p-4 text-center" style="margin-top:20px">
     <h3 class="p-2 mx-auto"><?php echo $team['teamName']; ?></h3>
@@ -11,7 +12,7 @@ $contracts = $db->getTeamContract($team['idTeam']);
     </ul>
 </div>
 
-<div class="d-flex border-top" style="height: 50%;">
+<div class="d-flex border-top text-center" style="height: 50%;">
     <div class="tableDiv my-4 mx-4">
         <table class="table">
             <thead>
@@ -43,13 +44,16 @@ $contracts = $db->getTeamContract($team['idTeam']);
                 </tr>
             </thead>
             <tbody>
+                <?php foreach($employees as $emp): ?>
                 <tr>
-                    <td>Frederic Vasseur</td>
-                    <td>Team Principal</td>
-                    <td>France</td>
+                    <td><?php echo $emp['employeeName'] . ' ' . $emp['employeeSurname']?></td>
+                    <td><?php echo $emp['employeeRole'] ?></td>
+                    <td><?php echo $emp['nationality'] ?></td>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
+        <a href="./employee.php?page=add&teamId=<?php echo $team['idTeam'] ?>" class="btn btn-dark mx-auto">Add Employee</a>
     </div>
 </div>
 </main>

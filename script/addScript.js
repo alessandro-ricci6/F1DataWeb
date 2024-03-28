@@ -160,3 +160,28 @@ function addChampionship(){
         });
     }
 }
+
+function addEmployee(){
+    empName = document.getElementById("nameInput").value
+    empSurname = document.getElementById("surnameInput").value
+    role = document.getElementById("roleInput").value
+    nationality = document.getElementById("nationalityInput").value
+    team = document.getElementById("addEmployeeBtn").dataset.bsTeam
+
+    $.ajax({
+        type: "POST",
+        url: "functions/team.php",
+        data: {
+            action: "addEmp",
+            name: empName,
+            surname: empSurname,
+            role: role,
+            nationality: nationality,
+            team: team
+        },
+        success: function (response) {
+            console.log(response)
+            window.location.href = `./team.php?page=detail&teamId=${team}`
+        }
+    });
+}
