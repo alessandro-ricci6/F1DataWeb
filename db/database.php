@@ -11,7 +11,7 @@ class DatabaseHelper {
     }
 
     public function getAllDriver() {
-        $stmt = $this->db->prepare("SELECT * FROM Driver");
+        $stmt = $this->db->prepare("SELECT * FROM Driver ORDER BY driverName");
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -503,6 +503,36 @@ class DatabaseHelper {
         $stmt = $this->db->prepare("INSERT INTO Employee(employeeName, employeeSurname, employeeRole, nationality, idTeam)
         VALUE (?, ?, ?, ?, ?)");
         $stmt->bind_param('ssssi', $name, $surname, $role, $nationality, $teamId);
+        $stmt->execute();
+    }
+
+    public function addRace($championshipId, $round, $trackId, $raceType, $laps) {
+        $stmt = $this->db->prepare("INSERT INTO Race (idChampionship, round, idTrack, laps, raceType) VALUE
+        (?, ?, ?, ?, ?)");
+        $stmt->bind_param('iiiis', $championshipId, $round, $trackId, $laps, $raceType);
+        $stmt->execute();
+    }
+
+    public function getLastRaceAdded(){
+        $stmt = $this->db->prepare("SELECT idRace, raceType FROM Race ORDER BY idRace DESC LIMIT 1");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function addStartingGrid($raceId, $driverId, $position, $time){
+        $stmt = $this->db->prepare("INSERT INTO StartingGrid (idRace, idDriver, position, qualificationTime) VALUE
+        (?, ?, ?, ?)");
+        $stmt->bind_param('iiis', $raceId, $driverId, $position, $time);
+        $stmt->execute();
+    }
+
+    public function addRaceResult($raceId, $driverId, $teamId, $position, $time, $points, $endStatus){
+        $stmt = $this->db->prepare("INSERT INTO 
+        RaceResult (idRace, idDriver, idTeam, position, fastestTime, points, endStatus) VALUE
+        (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param('iiisis', $raceId, $driverId, $position, $time, $points, $endStatus);
         $stmt->execute();
     }
 }

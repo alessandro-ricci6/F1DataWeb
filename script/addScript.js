@@ -185,3 +185,91 @@ function addEmployee(){
         }
     });
 }
+
+function addRace(){
+    season = document.getElementById("seasonSelect").value
+    track = document.getElementById("trackSelect").value
+    round = document.getElementById("roundInput").value
+    raceType = document.querySelector('input[type="radio"][name="flexRadioDefault"]:checked')
+    laps = document.getElementById("lapsInput").value
+    console.log(raceType)
+    $.ajax({
+        type: "POST",
+        url: "functions/races.php",
+        data: {
+            action: "addRace",
+            season: season,
+            track: track,
+            round: round,
+            raceType: raceType.value,
+            laps: laps,
+        },
+        success: function (response) {
+            console.log(response)
+            window.location.href = "./race.php?page=addQualification"
+        }
+    });
+}
+
+function addQuali(){
+    for(i = 1; i <=20; i++){
+        driver = document.getElementById("driverP" + i + "Select")
+        time = document.getElementById("d" + i + "Time")
+        if(time.value != ""){
+            lapTime = time.value
+        } else {
+            lapTime = "No Time"
+        }
+        console.log(i)
+        $.ajax({
+            type: "POST",
+            url: "functions/races.php",
+            data: {
+                action: "addQuali",
+                driver: driver.value,
+                time: lapTime,
+                position: i,
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        });
+    }
+    window.location.href = "./race.php?page=addResult"
+}
+
+function addResult(){
+    for(i = 1; i <=20; i++){
+        driver = document.getElementById("driverP" + i + "Select")
+        time = document.getElementById("d" + i + "Time")
+        team = document.getElementById("teamP" + i + "Select")
+        endStatus = document.getElementById("endStatusP" + i + "Select")
+        fastestLapCheck = document.getElementById("fastesLapP" + i)
+        if(time.value != ""){
+            lapTime = time.value
+        } else {
+            lapTime = "No Time"
+        }
+        if(fastestLapCheck.checked){
+            fastestLap = "y"
+        } else {
+            fastestLap = "n"
+        }
+        $.ajax({
+            type: "POST",
+            url: "functions/races.php",
+            data: {
+                action: "addResult",
+                driver: driver.value,
+                team: team.value,
+                time: lapTime,
+                position: i,
+                endStatus: endStatus.value,
+                fastestLap: fastestLap
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        });
+    }
+}

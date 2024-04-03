@@ -33,7 +33,7 @@ switch ($_GET['page']) {
 
         case 'addResult':
 
-            $templateParams['title'] = 'F1Data - Add Resuòt';
+            $templateParams['title'] = 'F1Data - Add Result';
             $templateParams['name'] = 'race/addResult.php';
             break;
 

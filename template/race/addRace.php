@@ -32,13 +32,13 @@
                 <div class="mt-3 d-flex">
                     <p>Race type:</p>
                     <div class="form-check mx-5">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="normaleRadio" checked>
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="normalRadio" value="Normal" checked>
                         <label class="form-check-label" for="flexRadioDefault1">
                             Normal
                         </label>
                     </div>
                     <div class="form-check mx-5">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="sprintRadio">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="sprintRadio" value="Sprint">
                         <label class="form-check-label" for="flexRadioDefault2">
                             Sprint
                         </label>
@@ -50,6 +50,7 @@
                     <input class="form-control border border-dark" type="number" name="lapsInput" id="lapsInput">
                 </div>
 
-                <a class="btn btn-dark mt-3 w-50" href="race.php?page=addQualification"><i class="fa-solid fa-arrow-right"></i></a>
+                <button class="btn btn-dark mt-3 w-50" href="race.php?page=addQualification" onclick="addRace()"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </main>
+    <script src="./script/addScript.js"></script>
