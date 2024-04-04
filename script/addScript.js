@@ -212,6 +212,7 @@ function addRace(){
 }
 
 function addQuali(){
+    let driverList = {}
     for(i = 1; i <=20; i++){
         driver = document.getElementById("driverP" + i + "Select")
         time = document.getElementById("d" + i + "Time")
@@ -220,31 +221,31 @@ function addQuali(){
         } else {
             lapTime = "No Time"
         }
-        console.log(i)
-        $.ajax({
-            type: "POST",
-            url: "functions/races.php",
-            data: {
-                action: "addQuali",
-                driver: driver.value,
-                time: lapTime,
-                position: i,
-            },
-            success: function (response) {
-                console.log(response)
-            }
-        });
+        driverList[i] = {driver: driver.value, position: i, time: lapTime}
     }
-    window.location.href = "./race.php?page=addResult"
+    qualiList = JSON.stringify(driverList)
+    $.ajax({
+        type: "POST",
+        url: "functions/races.php",
+        data: {
+            action: "addQuali",
+            list: qualiList,
+        },
+        success: function (response) {
+            console.log(response)
+            window.location.href = "./race.php?page=addResult"
+        }
+    });
 }
 
 function addResult(){
+    resList = {}
     for(i = 1; i <=20; i++){
         driver = document.getElementById("driverP" + i + "Select")
         time = document.getElementById("d" + i + "Time")
         team = document.getElementById("teamP" + i + "Select")
         endStatus = document.getElementById("endStatusP" + i + "Select")
-        fastestLapCheck = document.getElementById("fastesLapP" + i)
+        fastestLapCheck = document.getElementById("fastestLapP" + i)
         if(time.value != ""){
             lapTime = time.value
         } else {
@@ -255,21 +256,22 @@ function addResult(){
         } else {
             fastestLap = "n"
         }
-        $.ajax({
-            type: "POST",
-            url: "functions/races.php",
-            data: {
-                action: "addResult",
-                driver: driver.value,
-                team: team.value,
-                time: lapTime,
-                position: i,
-                endStatus: endStatus.value,
-                fastestLap: fastestLap
-            },
-            success: function (response) {
-                console.log(response)
-            }
-        });
+        resList[i] = 
+        {driver: driver.value, team: team.value, time: lapTime, endStatus: endStatus.value, fastLap: fastestLap, position: i}
     }
+
+    resultList = JSON.stringify(resList)
+
+    $.ajax({
+        type: "POST",
+        url: "functions/races.php",
+        data: {
+            action: "addResult",
+            list: resultList,
+        },
+        success: function (response) {
+            console.log(response)
+            window.location.href = './race.php?page=list'
+        }
+    });
 }

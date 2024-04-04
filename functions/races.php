@@ -22,26 +22,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $db->addRace($championship, $round, $trackId, $raceType, $laps);
     }
     elseif($_POST['action'] == 'addQuali'){
-        $raceId = $db->getLastRaceAdded();
-        $driverId = $_POST['driver'];
-        $position = $_POST['position'];
-        $time = $_POST['time'];
+        $race = $db->getLastRaceAdded()[0];
+        $qualiList = json_decode($_POST['list'], true);
+        foreach($qualiList as $q){
+            $db->addStartingGrid($race['idRace'], $q['driver'], $q['position'], $q['time']);
+        }
     }
     elseif($_POST['action'] == 'addResult'){
-        $race = $db->getLastRaceAdded();
-        $driverId = $_POST['driver'];
-        $position = $_POST['position'];
-        $time = $_POST['time'];
-        $teamId = $_POST['team'];
-        $status = $_POST['endStatus'];
-        if($race['raceType'] == 'Normal'){
-            $points = getNormalPoints($position);
-        } else {
-            $points = getSprintPoints($position);
+        $race = $db->getLastRaceAdded()[0];
+        $resList = json_decode($_POST['list'], true);
+        foreach($resList as $r){
+            if($race['raceType'] == 'Normal'){
+                $points = getNormalPoints($r['position']);
+            } else {
+                $points = getSprintPoints($r['position']);
+            }
+            if($r['fastestLap'] = 'y'){
+                $points = $points + 1;
+            }
+            $db->addRaceResult($race['idRace'], $r['driver'], $r['team'], $r['position'], $r['time'], $points, $r['endStatus']);
         }
-        if($_POST['fastestLap'] = 'y'){
-            $points = $points + 1;
-        }
-        $db->addRaceResult($race['idRace'], $driverId, $teamId, $position, $time, $points, $endStatus);
+        
     }
 }

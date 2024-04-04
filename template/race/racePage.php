@@ -4,8 +4,6 @@
     ini_set('display_errors', 1);
     $qualiResult = $db->getQualiResultOfRace($race['idRace']);
     $fastestLap = $db->getFastestLapOfRace($race['idRace'])[0];?>
-        <div class="d-inline-flex flex-row w-100 justify-content-between px-5">
-            <a href="race.php?page=detail&raceId=<?php echo $race['idRace'] - 1; ?>" class="btn my-5 <?php echo predIsActive($race['idRace']) ?>"><i class="fa-solid fa-arrow-left fs-1"></i></a>
             <div class="p-4 text-center my-1">
                 <h3 class="p-2"><?php echo $race['trackName']; ?></h3>
                 <ul class="list-group list-group-horizontal col-10 mx-3">
@@ -16,8 +14,6 @@
                     <li class="list-group-item"><h6>Track:</h6><a class="btn btn-dark" href="./track.php?page=detail&trackId=<?php echo $race['idTrack']?>">Go to track page</a></li>
                 </ul>
             </div>
-            <a href="race.php?page=detail&raceId=<?php echo $race['idRace'] + 1; ?>" class="btn my-5 <?php echo raceNextIsActive($race['idRace'], $db->getNumberOfRaces()) ?>"><i class="fa-solid fa-arrow-right fs-1"></i></a>
-        </div>
 
 		<div class="border-top" style="height: 50%;">
 

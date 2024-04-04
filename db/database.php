@@ -248,7 +248,7 @@ class DatabaseHelper {
     }
 
     public function getFastestLapOfRace($raceId) {
-        $stmt = $this->db->prepare("SELECT RaceResult.*, Driver.* FROM RaceResult
+        $stmt = $this->db->prepare("SELECT RaceResult.fastestLap, Driver.driverName, Driver.driverSurname FROM RaceResult
         INNER JOIN Driver ON RaceResult.idDriver = Driver.idDriver
         WHERE idRace = ? ORDER BY fastestLap LIMIT 1");
         $stmt->bind_param('i', $raceId);
@@ -530,9 +530,9 @@ class DatabaseHelper {
 
     public function addRaceResult($raceId, $driverId, $teamId, $position, $time, $points, $endStatus){
         $stmt = $this->db->prepare("INSERT INTO 
-        RaceResult (idRace, idDriver, idTeam, position, fastestTime, points, endStatus) VALUE
+        RaceResult (idRace, idDriver, idTeam, position, fastestLap, points, endStatus) VALUE
         (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('iiisis', $raceId, $driverId, $position, $time, $points, $endStatus);
+        $stmt->bind_param('iiiisis', $raceId, $driverId, $teamId, $position, $time, $points, $endStatus);
         $stmt->execute();
     }
 }
