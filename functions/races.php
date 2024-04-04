@@ -32,15 +32,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $race = $db->getLastRaceAdded()[0];
         $resList = json_decode($_POST['list'], true);
         foreach($resList as $r){
+            $points = 0;
             if($race['raceType'] == 'Normal'){
                 $points = getNormalPoints($r['position']);
             } else {
                 $points = getSprintPoints($r['position']);
             }
-            if($r['fastestLap'] = 'y'){
+            echo $r['fastLap'];
+            if($r['fastLap'] == 'y' && $r['position'] <= 10){
                 $points = $points + 1;
             }
-            $db->addRaceResult($race['idRace'], $r['driver'], $r['team'], $r['position'], $r['time'], $points, $r['endStatus']);
+            echo $points;
+            //$db->addRaceResult($race['idRace'], $r['driver'], $r['team'], $r['position'], $r['time'], $points, $r['endStatus']);
         }
         
     }
