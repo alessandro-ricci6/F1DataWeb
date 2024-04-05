@@ -1,7 +1,6 @@
 <main class="float-end d-flex align-items-center flex-column overflow-auto">
 <?php $race = $templateParams['race'];
     $results = $db->getResultOfRace($race['idRace']);
-    ini_set('display_errors', 1);
     $qualiResult = $db->getQualiResultOfRace($race['idRace']);
     $fastestLap = $db->getFastestLapOfRace($race['idRace'])[0];?>
             <div class="p-4 text-center my-1">

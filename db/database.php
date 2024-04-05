@@ -148,7 +148,7 @@ class DatabaseHelper {
     }
 
     public function getAllTeam() {
-        $stmt = $this->db->prepare("SELECT * FROM Team");
+        $stmt = $this->db->prepare("SELECT * FROM Team ORDER BY teamName");
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -351,7 +351,7 @@ class DatabaseHelper {
     }
 
     public function getAllTracks() {
-        $stmt = $this->db->prepare("SELECT * FROM Track");
+        $stmt = $this->db->prepare("SELECT * FROM Track ORDER BY trackName");
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -446,7 +446,7 @@ class DatabaseHelper {
 
     public function searchDriver($input) {
         $stmt = $this->db->prepare("SELECT * FROM Driver 
-        WHERE driverName OR driverSurname LIKE '%{$input}%'
+        WHERE driverName LIKE '%{$input}%' OR driverSurname LIKE '%{$input}%'
         LIMIT 10");
         $stmt->execute();
         $result = $stmt->get_result();
@@ -535,4 +535,95 @@ class DatabaseHelper {
         $stmt->bind_param('iiiisis', $raceId, $driverId, $teamId, $position, $time, $points, $endStatus);
         $stmt->execute();
     }
+
+    public function getTopTenQualiTime($trackId){
+        $stmt = $this->db->prepare("SELECT Driver.idDriver, Driver.driverName, Driver.driverSurname, StartingGrid.qualificationTime, Championship.season, Race.round
+        FROM StartingGrid
+        INNER JOIN Race ON Race.idRace = StartingGrid.idRace
+        INNER JOIN Driver ON StartingGrid.idDriver = Driver.idDriver
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        INNER JOIN Track ON Track.idTrack = Race.idTrack
+        WHERE Track.idTrack = ? ORDER BY StartingGrid.qualificationTime
+        LIMIT 10");
+        $stmt->bind_param('i', $trackId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTopTenRaceTime($trackId) {
+        $stmt = $this->db->prepare("SELECT Driver.idDriver, Driver.driverName, Driver.driverSurname, RaceResult.fastestLap, Championship.season, Race.round
+        FROM RaceResult
+        INNER JOIN Race ON Race.idRace = RaceResult.idRace
+        INNER JOIN Driver ON RaceResult.idDriver = Driver.idDriver
+        INNER JOIN Championship ON Race.idChampionship = Championship.idChampionship
+        INNER JOIN Track ON Track.idTrack = Race.idTrack
+        WHERE Track.idTrack = ? ORDER BY RaceResult.fastestLap
+        LIMIT 10");
+        $stmt->bind_param('i', $trackId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getMostWinningDriverInTrack($idTrack){
+        $stmt = $this->db->prepare("SELECT Driver.*, COUNT(RaceResult.idDriver) AS totalWin
+        FROM Driver
+        INNER JOIN RaceResult ON RaceResult.idDriver = Driver.idDriver
+        INNER JOIN Race ON RaceResult.idRace = Race.idRace
+        WHERE Race.idTrack = ? AND RaceResult.position = 1
+        GROUP BY Driver.idDriver ORDER BY totalWin DESC LIMIT 1");
+        $stmt->bind_param('i', $idTrack);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDriverClassifiedRacePart(){
+        $stmt = $this->db->prepare("SELECT Driver.*, COUNT(RaceResult.idRaceResult) AS racePart
+        FROM Driver
+        INNER JOIN RaceResult ON RaceResult.idDriver = Driver.idDriver
+        GROUP BY Driver.idDriver ORDER BY racePart DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDriverMostPole(){
+        $stmt = $this->db->prepare("SELECT Driver.*, COUNT(StartingGrid.idStartingGrid) AS poleRes
+        FROM Driver
+        INNER JOIN StartingGrid ON StartingGrid.idDriver = Driver.idDriver
+        WHERE StartingGrid.position = 1
+        GROUP BY Driver.idDriver ORDER BY poleRes DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getDriverDiffTeamWin(){
+        $stmt = $this->db->prepare("SELECT Driver.*, COUNT(DISTINCT RaceResult.idTeam) AS teamCount
+        FROM Driver
+        INNER JOIN RaceResult ON Driver.idDriver = RaceResult.idDriver
+        WHERE RaceResult.position = 1
+        GROUP BY Driver.idDriver
+        ORDER BY teamCount DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function updateTrack($trackId, $name, $country, $city, $length){
+        $stmt = $this->db->prepare("UPDATE Track
+        SET trackName = ?, country = ?, city = ?, trackLength = ?
+        WHERE idTrack = ?");
+        $stmt->bind_param('sssii', $name, $country, $city, $length, $trackId);
+        $stmt->execute();
+    }
+
 }

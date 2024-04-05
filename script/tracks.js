@@ -16,6 +16,16 @@ function updateTable(trackList){
     }
 }
 
+function updateTrackPage(name, country, city, length){
+    trackName = document.getElementById("trackNameTitle")
+    trackLocation = document.getElementById("locationPar")
+    trackLength = document.getElementById("lengthPar")
+
+    trackName.innerHTML = name
+    trackLocation.textContent = city + ", " + country
+    trackLength.textContent = length
+}
+
 function filterTracks(){
     select = document.getElementById("countrySelect")
     $(select).on("change", function(){
@@ -32,6 +42,31 @@ function filterTracks(){
             }
         });
     })
+}
+
+function updateTrack(){
+    trackId = document.getElementById("updateBtn").dataset.bsTrack
+    trackName = document.getElementById("trackNameInput").value
+    country = document.getElementById("countryInput").value
+    city = document.getElementById("cityInput").value
+    length = document.getElementById("lengthInput").value
+
+    $.ajax({
+        type: "POST",
+        url: "functions/track.php",
+        data: {
+            action: "update",
+            trackId: trackId,
+            name: trackName,
+            country: country,
+            city: city,
+            length: length
+        },
+        success: function (response) {
+            console.log(response)
+            updateTrackPage(trackName, country, city, length)
+        }
+    });
 }
 
 $(document).ready(filterTracks)

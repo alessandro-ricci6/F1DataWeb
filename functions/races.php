@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $points = $points + 1;
             }
             echo $points;
-            //$db->addRaceResult($race['idRace'], $r['driver'], $r['team'], $r['position'], $r['time'], $points, $r['endStatus']);
+            $db->addRaceResult($race['idRace'], $r['driver'], $r['team'], $r['position'], $r['time'], $points, $r['endStatus']);
         }
         
     }

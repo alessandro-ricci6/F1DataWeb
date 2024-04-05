@@ -155,7 +155,7 @@ function addChampionship(){
                 round: round
             },
             success: function (response) {
-                
+                window.location.href = "./season.php?page=list"
             }
         });
     }
