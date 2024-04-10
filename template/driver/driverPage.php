@@ -119,7 +119,7 @@
             </div>
             <div class="py-4">
                 <h6>Select the season:</h6>
-                <select class="form-control w-25" name="seasonSelect" id="seasonSelect" data-bs-driverId="<?php echo $driver['idDriver'] ?>">
+                <select class="form-select w-25" name="seasonSelect" id="seasonSelect" data-bs-driverId="<?php echo $driver['idDriver'] ?>">
                     <option value="" selected>No season Selected</option>
                     <?php foreach($seasons as $s): ?>
                         <option value="<?php echo $s['idChampionship'] ?>"><?php echo $s['season'] ?></option>

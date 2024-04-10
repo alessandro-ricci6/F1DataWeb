@@ -53,8 +53,8 @@
                 <table class="table">
                     <thead class="sticky-top">
                         <tr>
-                            <th scope="col">Driver</th>
 							<th scope="col">Position</th>
+                            <th scope="col">Driver</th>
                             <th scope="col">Qualifying Lap</th>
                         </tr>
                     </thead>
@@ -63,8 +63,8 @@
                         foreach($qualiResult as $quali):
                         ?>
                         <tr>
+                            <td><?php echo $quali['position'] ?></td>
 							<td><a href="driver.php?page=detail&driverId=<?php echo $quali['idDriver'] ?>"><?php echo $quali['driverName'] . ' ' . $quali['driverSurname']; ?></a></td>
-							<td><?php echo $quali['position'] ?></td>
                             <td><?php echo $quali['qualificationTime'];?></td>
                         </tr>
                         <?php endforeach; ?>

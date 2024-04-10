@@ -23,7 +23,7 @@ posChart = new Chart(chart, {
       y: {
         reverse: true,
         min: 1,
-        max: 20,
+        max: 25,
         beginAtZero: false,
       },
       x: {
@@ -57,7 +57,7 @@ function setTitle(year){
 
 function setLabels(){
     for(i in raceList){
-        labels.push(raceList[i]['trackName'] + ", Round: " + raceList[i]['round'] + ' - ' + raceList[i]['raceType'])
+        labels.push(raceList[i]['trackName'] + "\nRound: " + raceList[i]['round'] + ' - ' + raceList[i]['raceType'] + " race\nEnd Status: " + raceList[i]['endStatus'])
     }
 }
 
