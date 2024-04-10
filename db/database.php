@@ -191,7 +191,7 @@ class DatabaseHelper {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        return $result;
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function getTeamById($teamId) {
@@ -281,7 +281,7 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    //Driver never went in points
+    //Driver never went in points (First 10 position)
     public function neverPointsDriver() {
         $stmt = $this->db->prepare("SELECT *, COUNT(RaceResult.idRaceResult) AS racePartecipation
         FROM Driver
@@ -344,10 +344,19 @@ class DatabaseHelper {
     }
     
     public function addContract($driverId, $teamId, $signYear, $expYear) {
-        $stmt = $this->db->prepare("INSERT INTO Contract(idDriver, idTeam, signingYear, expirationYear) VALUE
-        (?, ?, ?, ?)");
-        $stmt->bind_param('iiii', $driverId, $teamId, $signYear, $expYear);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO Contract(idDriver, idTeam, signingYear, expirationYear) VALUE
+            (?, ?, ?, ?)");
+            $stmt->bind_param('iiii', $driverId, $teamId, $signYear, $expYear);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function getAllTracks() {
@@ -376,10 +385,19 @@ class DatabaseHelper {
     }
 
     public function addDriver($name, $surname, $nationality, $number, $birth) {
-        $stmt = $this->db->prepare("INSERT INTO Driver(driverName, driverSurname, nationality, permanentNumber, dateOfBirth) VALUE
-        (?, ?, ?, ?, ?)");
-        $stmt->bind_param('sssis', $name, $surname, $nationality, $number, $birth);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO Driver(driverName, driverSurname, nationality, permanentNumber, dateOfBirth) VALUE
+            (?, ?, ?, ?, ?)");
+            $stmt->bind_param('sssis', $name, $surname, $nationality, $number, $birth);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function getSeasonById($id){
@@ -412,10 +430,19 @@ class DatabaseHelper {
     }
 
     public function addTeam($name, $nationality, $headquarter) {
-        $stmt = $this->db->prepare("INSERT INTO Team(teamName, nationality, headquarter) VALUE
-        (?, ?, ?)");
-        $stmt->bind_param('sss', $name, $nationality, $headquarter);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO Team(teamName, nationality, headquarter) VALUE
+            (?, ?, ?)");
+            $stmt->bind_param('sss', $name, $nationality, $headquarter);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function getSeasonOfDriver($driverId) {
@@ -455,31 +482,67 @@ class DatabaseHelper {
     }
 
     public function addTrack($trackName, $country, $city, $length) {
-        $stmt = $this->db->prepare("INSERT INTO Track(trackName, country, city, trackLength)
-        VALUES (?, ?, ?, ?)");
-        $stmt->bind_param('sssi', $trackName, $country, $city, $length);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO Track(trackName, country, city, trackLength)
+            VALUES (?, ?, ?, ?)");
+            $stmt->bind_param('sssi', $trackName, $country, $city, $length);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function addChampionship($season, $round){
-        $stmt = $this->db->prepare("INSERT INTO Championship(season, roundNumber)
-        VALUES (?, ?)");
-        $stmt->bind_param('ii', $season, $round);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO Championship(season, roundNumber)
+            VALUES (?, ?)");
+            $stmt->bind_param('ii', $season, $round);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function deleteContract($contractId){
-        $stmt = $this->db->prepare("DELETE FROM Contract WHERE idContract = ?");
-        $stmt->bind_param('i', $contractId);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("DELETE FROM Contract WHERE idContract = ?");
+            $stmt->bind_param('i', $contractId);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function updateContract($contractId, $expYear, $signYear, $teamId){
-        $stmt = $this->db->prepare("UPDATE Contract
-        SET idTeam = ?, expirationYear = ?, signingYear = ?
-        WHERE idContract = ?");
-        $stmt->bind_param('iiii', $teamId, $expYear, $signYear, $contractId);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("UPDATE Contract
+            SET idTeam = ?, expirationYear = ?, signingYear = ?
+            WHERE idContract = ?");
+            $stmt->bind_param('iiii', $teamId, $expYear, $signYear, $contractId);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function getEmployeeOfTeam($teamId){
@@ -500,17 +563,35 @@ class DatabaseHelper {
     }
 
     public function addEmployee($name, $surname, $nationality, $role, $teamId){
-        $stmt = $this->db->prepare("INSERT INTO Employee(employeeName, employeeSurname, employeeRole, nationality, idTeam)
-        VALUE (?, ?, ?, ?, ?)");
-        $stmt->bind_param('ssssi', $name, $surname, $role, $nationality, $teamId);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO Employee(employeeName, employeeSurname, employeeRole, nationality, idTeam)
+            VALUE (?, ?, ?, ?, ?)");
+            $stmt->bind_param('ssssi', $name, $surname, $role, $nationality, $teamId);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function addRace($championshipId, $round, $trackId, $raceType, $laps) {
-        $stmt = $this->db->prepare("INSERT INTO Race (idChampionship, round, idTrack, laps, raceType) VALUE
-        (?, ?, ?, ?, ?)");
-        $stmt->bind_param('iiiis', $championshipId, $round, $trackId, $laps, $raceType);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO Race (idChampionship, round, idTrack, laps, raceType) VALUE
+            (?, ?, ?, ?, ?)");
+            $stmt->bind_param('iiiis', $championshipId, $round, $trackId, $laps, $raceType);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function getLastRaceAdded(){
@@ -522,18 +603,36 @@ class DatabaseHelper {
     }
 
     public function addStartingGrid($raceId, $driverId, $position, $time){
-        $stmt = $this->db->prepare("INSERT INTO StartingGrid (idRace, idDriver, position, qualificationTime) VALUE
-        (?, ?, ?, ?)");
-        $stmt->bind_param('iiis', $raceId, $driverId, $position, $time);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO StartingGrid (idRace, idDriver, position, qualificationTime) VALUE
+            (?, ?, ?, ?)");
+            $stmt->bind_param('iiis', $raceId, $driverId, $position, $time);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function addRaceResult($raceId, $driverId, $teamId, $position, $time, $points, $endStatus){
-        $stmt = $this->db->prepare("INSERT INTO 
-        RaceResult (idRace, idDriver, idTeam, position, fastestLap, points, endStatus) VALUE
-        (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('iiiisis', $raceId, $driverId, $teamId, $position, $time, $points, $endStatus);
-        $stmt->execute();
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("INSERT INTO 
+            RaceResult (idRace, idDriver, idTeam, position, fastestLap, points, endStatus) VALUE
+            (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param('iiiisis', $raceId, $driverId, $teamId, $position, $time, $points, $endStatus);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     public function getTopTenQualiTime($trackId){
@@ -618,12 +717,21 @@ class DatabaseHelper {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function updateTrack($trackId, $name, $country, $city, $length){
-        $stmt = $this->db->prepare("UPDATE Track
-        SET trackName = ?, country = ?, city = ?, trackLength = ?
-        WHERE idTrack = ?");
-        $stmt->bind_param('sssii', $name, $country, $city, $length, $trackId);
-        $stmt->execute();
+    public function updateTrack($trackId, $name, $country, $city, $length) {
+        try {
+            $this->db->begin_transaction();
+    
+            $stmt = $this->db->prepare("UPDATE Track
+            SET trackName = ?, country = ?, city = ?, trackLength = ?
+            WHERE idTrack = ?");
+            $stmt->bind_param('sssii', $name, $country, $city, $length, $trackId);
+            $stmt->execute();
+    
+            $this->db->commit();
+        } catch (Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
 }
