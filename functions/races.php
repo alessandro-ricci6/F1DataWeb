@@ -18,18 +18,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $trackId = $_POST['track'];
         $raceType = $_POST['raceType'];
         $laps = $_POST['laps'];
+        $raceName = $_POST['raceName'];
+        $date = $_POST['date'];
 
-        $db->addRace($championship, $round, $trackId, $raceType, $laps);
+        $db->addRace($championship, $round, $trackId, $raceType, $laps, $raceName, $date);
+        $data = $db->getLastRaceAdded()[0];
+        echo json_encode($data);
     }
     elseif($_POST['action'] == 'addQuali'){
-        $race = $db->getLastRaceAdded()[0];
+        $race = $_POST['raceId'];
         $qualiList = json_decode($_POST['list'], true);
         foreach($qualiList as $q){
-            $db->addStartingGrid($race['idRace'], $q['driver'], $q['position'], $q['time']);
+            $db->addStartingGrid($race, $q['driver'], $q['position'], $q['time']);
         }
     }
     elseif($_POST['action'] == 'addResult'){
-        $race = $db->getLastRaceAdded()[0];
+        $race = $db->getRaceById($_POST['raceId']);
         $resList = json_decode($_POST['list'], true);
         foreach($resList as $r){
             $points = 0;

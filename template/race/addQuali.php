@@ -252,6 +252,6 @@
 				</div>
 			</div>
 		</div>
-		<button class="btn btn-dark w-25 my-3" onclick="addQuali()"><i class="fa-solid fa-arrow-right"></i></button>
+		<button class="btn btn-dark w-25 my-3" onclick="addQuali()" data-bs-race="<?php echo $templateParams['raceId'] ?>" id="addQualiBtn"><i class="fa-solid fa-arrow-right"></i></button>
     </main>
 	<script src="./script/addScript.js"></script>

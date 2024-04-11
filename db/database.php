@@ -578,13 +578,13 @@ class DatabaseHelper {
         }
     }
 
-    public function addRace($championshipId, $round, $trackId, $raceType, $laps) {
+    public function addRace($championshipId, $round, $trackId, $raceType, $laps, $raceName, $date) {
         try {
             $this->db->begin_transaction();
     
-            $stmt = $this->db->prepare("INSERT INTO Race (idChampionship, round, idTrack, laps, raceType) VALUE
-            (?, ?, ?, ?, ?)");
-            $stmt->bind_param('iiiis', $championshipId, $round, $trackId, $laps, $raceType);
+            $stmt = $this->db->prepare("INSERT INTO Race (idChampionship, round, idTrack, laps, raceType, raceName, raceDate) VALUE
+            (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param('iiiisss', $championshipId, $round, $trackId, $laps, $raceType, $raceName, $date);
             $stmt->execute();
     
             $this->db->commit();

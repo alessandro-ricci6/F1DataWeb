@@ -29,13 +29,15 @@ switch ($_GET['page']) {
 
         $templateParams['title'] = 'F1Data - Add Qualification';
         $templateParams['name'] = 'race/addQuali.php';
+        $templateParams['raceId'] = $_GET['raceId'];
         break;
 
-        case 'addResult':
+    case 'addResult':
 
-            $templateParams['title'] = 'F1Data - Add Result';
-            $templateParams['name'] = 'race/addResult.php';
-            break;
+        $templateParams['title'] = 'F1Data - Add Result';
+        $templateParams['name'] = 'race/addResult.php';
+        $templateParams['raceId'] = $_GET['raceId'];
+        break;
 
     default:
         # code...

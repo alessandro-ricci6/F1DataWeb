@@ -674,6 +674,6 @@
                 </div>
 			</div>
 		</div>
-		<button class="btn btn-dark w-25 my-3" onclick="addResult()"><i class="fa-solid fa-arrow-right"></i></button>
+		<button class="btn btn-dark w-25 my-3" onclick="addResult()" data-bs-race="<?php echo $templateParams['raceId'] ?>" id="addResultBtn"><i class="fa-solid fa-arrow-right"></i></button>
     </main>
 	<script src="./script/addScript.js"></script>

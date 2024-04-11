@@ -1,8 +1,7 @@
 <main class="float-end d-flex align-items-center flex-column overflow-auto">
 <?php $race = $templateParams['race'];
     $results = $db->getResultOfRace($race['idRace']);
-    $qualiResult = $db->getQualiResultOfRace($race['idRace']);
-    $fastestLap = $db->getFastestLapOfRace($race['idRace'])[0];?>
+    $qualiResult = $db->getQualiResultOfRace($race['idRace']);?>
             <div class="p-4 text-center my-1">
                 <h3 class="p-2"><?php echo $race['raceName']; ?></h3>
                 <ul class="list-group list-group-horizontal col-10 mx-3">
@@ -17,6 +16,10 @@
 
 		<div class="border-top" style="height: 50%;">
 
+            <?php
+            if(count($results) > 0):
+                $fastestLap = $db->getFastestLapOfRace($race['idRace'])[0];
+            ?>
             <p class="fs-5 my-3"><span class="fs-5 fw-bold">Fastest Lap of race: </span> <?php echo $fastestLap['driverName'] . ' ' . $fastestLap['driverSurname']
             . ' in ' . $fastestLap['fastestLap'] ?></p>
             <h4>Race results</h4>
@@ -48,7 +51,13 @@
                     </tbody>
                 </table>
             </div>
+            <?php else: ?>
+                <a href="./race.php?page=addResult&raceId=<?php echo $race['idRace'] ?>" class="btn btn-dark">Add Race Result</a>
+            <?php endif; ?>
 
+            <?php
+            if(count($qualiResult) > 0):
+            ?>
             <h4>Qualifying results</h4>
 			<div class="tableDiv my-4 mx-4">
                 <table class="table">
@@ -72,6 +81,8 @@
                     </tbody>
                 </table>
             </div>
-
+            <?php else: ?>
+                <a href="./race.php?page=addQualification&raceId=<?php echo $race['idRace'] ?>" class="btn btn-dark">Add Qualifying Result</a>
+            <?php endif; ?>
 		</div>
     </main>

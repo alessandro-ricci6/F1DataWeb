@@ -192,6 +192,8 @@ function addRace(){
     round = document.getElementById("roundInput").value
     raceType = document.querySelector('input[type="radio"][name="flexRadioDefault"]:checked')
     laps = document.getElementById("lapsInput").value
+    date = document.getElementById("dateInput").value
+    raceName = document.getElementById("raceNameInput").value
     console.log(raceType)
     $.ajax({
         type: "POST",
@@ -203,16 +205,19 @@ function addRace(){
             round: round,
             raceType: raceType.value,
             laps: laps,
+            date: date,
+            raceName: raceName
         },
         success: function (response) {
-            console.log(response)
-            window.location.href = "./race.php?page=addQualification"
+            datas = JSON.parse(response)
+            window.location.href = `./race.php?page=detail&raceId=${datas['idRace']}`
         }
     });
 }
 
 function addQuali(){
     let driverList = {}
+    const race = document.getElementById("addQualiBtn").dataset.bsRace
     for(i = 1; i <=20; i++){
         driver = document.getElementById("driverP" + i + "Select")
         time = document.getElementById("d" + i + "Time")
@@ -230,16 +235,18 @@ function addQuali(){
         data: {
             action: "addQuali",
             list: qualiList,
+            raceId: race
         },
         success: function (response) {
             console.log(response)
-            window.location.href = "./race.php?page=addResult"
+            window.location.href = `./race.php?page=detail&raceId=${race}`
         }
     });
 }
 
 function addResult(){
     resList = {}
+    const race = document.getElementById("addResultBtn").dataset.bsRace
     for(i = 1; i <=20; i++){
         driver = document.getElementById("driverP" + i + "Select")
         time = document.getElementById("d" + i + "Time")
@@ -261,6 +268,7 @@ function addResult(){
     }
 
     resultList = JSON.stringify(resList)
+    console.log(resultList)
 
     $.ajax({
         type: "POST",
@@ -268,10 +276,11 @@ function addResult(){
         data: {
             action: "addResult",
             list: resultList,
+            raceId: race
         },
         success: function (response) {
             console.log(response)
-            window.location.href = './race.php?page=list'
+            window.location.href = `./race.php?page=detail&raceId=${race}`
         }
     });
 }
