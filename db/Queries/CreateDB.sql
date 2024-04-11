@@ -54,7 +54,9 @@ create table Race (
      idChampionship int not null,
      round int not null,
      laps int not null,
-     raceType char(255) not null,
+     raceType char(25) not null,
+     raceDate date,
+     raceName char(40),
      primary key (idRace),
      foreign key (idTrack) references Track (idTrack),
      foreign key (idChampionship) references Championship (idChampionship));
@@ -85,7 +87,7 @@ create table StartingGrid (
 
 CREATE VIEW DriverChampResult AS
 SELECT rr.idDriver,
-	   CONCAT(d.driverName, ' ', d.driverSurname),
+	   CONCAT(d.driverName, ' ', d.driverSurname) AS driverName,
        r.idChampionship AS idChampionship,
        SUM(rr.points) AS total_points
 FROM RaceResult rr

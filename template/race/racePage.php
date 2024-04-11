@@ -4,13 +4,14 @@
     $qualiResult = $db->getQualiResultOfRace($race['idRace']);
     $fastestLap = $db->getFastestLapOfRace($race['idRace'])[0];?>
             <div class="p-4 text-center my-1">
-                <h3 class="p-2"><?php echo $race['trackName']; ?></h3>
+                <h3 class="p-2"><?php echo $race['raceName']; ?></h3>
                 <ul class="list-group list-group-horizontal col-10 mx-3">
                     <li class="list-group-item"><h6>Location:</h6><p><?php echo $race['city'] . ', ' . $race['country']; ?></p></li>
                     <li class="list-group-item"><h6>Season:</h6><p><?php echo $race['season']; ?></p></li>
                     <li class="list-group-item"><h6>Round:</h6><p><?php echo $race['round'] ?></p></li>
+                    <li class="list-group-item"><h6>Date:</h6><p><?php echo $race['raceDate'] ?></p></li>
                     <li class="list-group-item"><h6>Race Type:</h6><p><?php echo $race['raceType'] ?></p></li>
-                    <li class="list-group-item"><h6>Track:</h6><a class="btn btn-dark" href="./track.php?page=detail&trackId=<?php echo $race['idTrack']?>">Go to track page</a></li>
+                    <li class="list-group-item"><h6>Track:</h6><a class="btn border" href="./track.php?page=detail&trackId=<?php echo $race['idTrack']?>"><?php echo $race['trackName'] ?></a></li>
                 </ul>
             </div>
 

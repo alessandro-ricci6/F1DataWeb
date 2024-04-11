@@ -76,7 +76,7 @@
                         foreach($driverStanding as $d): ?>
                         <tr>
                             <td><?php echo $dPosition ?></td>
-                            <td><a href="driver.php?page=detail&driverId=<?php echo $d['idDriver'] ?>"><?php echo $d['driver_name'] ?></a></td>
+                            <td><a href="driver.php?page=detail&driverId=<?php echo $d['idDriver'] ?>"><?php echo $d['driverName'] ?></a></td>
                             <td><?php echo $d['total_points']?></td>
                         </tr>
                         <?php $dPosition += 1;

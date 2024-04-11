@@ -33,4 +33,4 @@ INSERT INTO Track(trackName, country, city, trackLength) VALUES
 ('Losail International Circuit', 'Qatar', 'Al Daayen', 5419),
 ('Jeddah Corniche Circuit', 'Saudi Arabia', 'Jeddah', 6174),
 ('Miami International Autodrome', 'USA', 'Miami', 5412),
-('Las Vegas Strip Street Circuit', 'United States', 'Las Vegas', 6201),
+('Las Vegas Strip Street Circuit', 'United States', 'Las Vegas', 6201)

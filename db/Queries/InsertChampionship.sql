@@ -73,4 +73,4 @@ INSERT INTO Championship (season, roundNumber) VALUES
 (2021, 22),
 (2022, 22),
 (2023, 22),
-(2024, 24),
+(2024, 24)

@@ -26,7 +26,7 @@ INSERT INTO Driver(driverName, driverSurname, nationality, dateOfBirth, permanen
 ('Sebastian', 'Vettel', 'German', '1987-07-03', 5),
 ('Mark', 'Webber', 'Australian', '1976-08-27', NULL),
 ('Sakon', 'Yamamoto', 'Japanese', '1982-07-09', NULL),
-('Jérôme', 'd'Ambrosio', 'Belgian', '1985-12-27', NULL),
+('Jérôme', "d'Ambrosio", 'Belgian', '1985-12-27', NULL),
 ('Paul', 'di Resta', 'British', '1986-04-16', 40),
 ('Narain', 'Karthikeyan', 'Indian', '1977-01-14', NULL),
 ('Pastor', 'Maldonado', 'Venezuelan', '1985-03-09', 13),
@@ -75,4 +75,4 @@ INSERT INTO Driver(driverName, driverSurname, nationality, dateOfBirth, permanen
 ('Guanyu', 'Zhou', 'Chinese', '1999-05-30', 24),
 ('Liam', 'Lawson', 'New Zealander', '2002-02-11', 40),
 ('Oscar', 'Piastri', 'Australian', '2001-04-06', 81),
-('Logan', 'Sargeant', 'American', '2000-12-31', 2),
+('Logan', 'Sargeant', 'American', '2000-12-31', 2)
